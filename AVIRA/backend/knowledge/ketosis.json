@@ -1,0 +1,83 @@
+{
+  "disease_id": "KETOSIS",
+  "name": "Ketosis",
+  "category": "Metabolic",
+  "pathogen": "Non-infectious – Negative energy balance post-parturition",
+  "description": "A metabolic disorder in dairy cattle characterised by abnormally elevated ketone bodies in blood, urine, and milk. Most common in early lactation (first 6 weeks post-calving).",
+  "urgency": "MEDIUM",
+  "vet_required": false,
+  "reportable_disease": false,
+  "diagnostic_criteria": {
+    "temperature": {
+      "min": 37.5,
+      "max": 38.5,
+      "unit": "°C",
+      "weight": 0.05,
+      "note": "Temperature typically normal or slightly low in ketosis"
+    },
+    "heart_rate": {
+      "min": 40,
+      "max": 70,
+      "unit": "BPM",
+      "weight": 0.05
+    },
+    "milk_production": {
+      "drop_threshold_percent": 25,
+      "weight": 0.25
+    },
+    "appetite": {
+      "max_score": 4,
+      "weight": 0.20
+    },
+    "rumination": {
+      "max_score": 4,
+      "weight": 0.15
+    },
+    "feed_intake": {
+      "drop_threshold_percent": 30,
+      "weight": 0.20
+    },
+    "physical_symptoms": [
+      { "symptom": "sweet_acetone_breath", "weight": 0.30 },
+      { "symptom": "weight_loss", "weight": 0.20 },
+      { "symptom": "reduced_rumen_fill", "weight": 0.20 },
+      { "symptom": "dull_coat", "weight": 0.10 },
+      { "symptom": "nervous_signs", "weight": 0.10 }
+    ]
+  },
+  "clinical_signs": [
+    "Sweet or fruity odour on breath (acetone)",
+    "Gradual drop in milk production over 2–7 days",
+    "Reduced feed intake, especially concentrates",
+    "Weight loss and thin body condition",
+    "Dull, tacky mucous membranes",
+    "Nervous signs (rare): circling, head pressing, hyperaesthesia",
+    "Reduced rumen motility"
+  ],
+  "differential_diagnoses": [
+    "Hypocalcaemia (Milk Fever)",
+    "Fatty Liver Syndrome",
+    "Displaced Abomasum",
+    "Puerperal Metritis"
+  ],
+  "vision_markers": [
+    "weight_loss",
+    "dull_coat",
+    "reduced_body_condition"
+  ],
+  "recommendations": [
+    "Administer propylene glycol (300–500 mL orally twice daily) for 3–5 days",
+    "Consult veterinarian if neurological signs present (nervous ketosis)",
+    "Increase energy density of ration – add bypass fat or glucose precursors",
+    "Reduce milking frequency temporarily in severe cases",
+    "Monitor blood or urine ketones (Keto-Test strips)",
+    "Ensure adequate dry matter intake in transition period",
+    "Review body condition score at dry-off (target BCS 3.0–3.5)",
+    "Ensure fresh cows have 24/7 access to palatable, high-quality forage"
+  ],
+  "references": [
+    "Duffield TF. Subclinical ketosis in lactating dairy cattle. Vet Clin North Am Food Anim Pract 2000",
+    "National Animal Disease Information Service (NADIS) – Ketosis",
+    "AHDB Dairy – Transition Cow Management"
+  ]
+}

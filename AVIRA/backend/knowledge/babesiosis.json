@@ -1,0 +1,65 @@
+{
+  "disease_id": "BABESIOSIS",
+  "name": "Babesiosis (Tick Fever / Redwater)",
+  "category": "Tick-Borne Protozoal",
+  "urgency": "CRITICAL",
+  "vet_required": true,
+  "reportable_disease": false,
+  "description": "Tick-borne protozoal infection causing haemolytic anaemia and haemoglobinuria (red urine / redwater). Caused by Babesia bovis or Babesia bigemina.",
+  "vital_sign_ranges": {
+    "temperature_min": 40.0,
+    "temperature_max": 41.5,
+    "heart_rate_min": 90,
+    "heart_rate_max": 130
+  },
+  "clinical_signs": [
+    "high fever 40-41.5°C",
+    "red or dark brown urine (haemoglobinuria)",
+    "anaemia pale mucous membranes",
+    "jaundice",
+    "rapid heart rate 90-130 bpm",
+    "rapid breathing",
+    "weakness",
+    "incoordination",
+    "loss of appetite",
+    "milk drop",
+    "tick infestation"
+  ],
+  "vision_markers": [
+    "red or dark urine visible near bedding",
+    "pale or yellow mucous membranes",
+    "jaundice yellowish tinge",
+    "ticks visible on skin",
+    "weakness unable to stand"
+  ],
+  "key_symptoms": ["fever", "red urine", "anaemia", "jaundice", "ticks"],
+  "diagnostic_criteria": {
+    "definitive": "Blood smear – Babesia parasites in erythrocytes",
+    "supportive": ["Fever 40-41.5°C", "Haemoglobinuria", "Anaemia", "Tick exposure", "Jaundice"]
+  },
+  "manual_input_indicators": {
+    "appetite": "very_low",
+    "milk_production": "very_low",
+    "observations_keywords": [
+      "red urine", "redwater", "babesia", "tick fever", "anaemia", "pale", "jaundice", "haemoglobin", "tick"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "Specific anti-protozoal drugs (Diminazene aceturate or Imidocarb dipropionate) – vet prescription only",
+    "supportive_care": [
+      "Tick control with acaricides",
+      "IV fluids for dehydration",
+      "Blood transfusion in severe anaemia (vet decision)",
+      "Shade and rest"
+    ],
+    "first_aid": "Isolate animal. Remove ticks. Keep in cool shade. Contact vet urgently.",
+    "do_not": "Do not stress the animal – movement worsens haemolysis"
+  },
+  "key_evidence_weights": {
+    "fever_range": 0.25,
+    "hr_elevated": 0.15,
+    "tick_exposure": 0.25,
+    "red_urine": 0.25,
+    "anaemia_jaundice": 0.10
+  }
+}

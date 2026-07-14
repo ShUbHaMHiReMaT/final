@@ -1,0 +1,42 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – AI Reasoning Chain
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-13T20:55:57.713768+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_65178B3C9F0B
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+Generated At    : 2026-07-13T20:55:57.713768+00:00
+
+[STEP 01] Vital Signs Evaluation
+  Agent        : VitalSignsAgent
+  Finding      : Composite stress index: 0.000
+  Confidence   : 100.0%
+
+[STEP 02] Disease Evaluation #1: Ketosis
+  Agent        : DISEASE_REASONING_ENGINE
+  Finding      : Probability 8.7% – MINIMAL confidence
+  Confidence   : 8.7%
+  Evidence     :
+    - Temperature 38.5°C within disease range [37.5–38.5°C]
+    - Heart rate 65 BPM matches disease profile
+  Notes        : Missing: Milk production 22.0 L/day – not significantly reduced, Appetite score 8/10 – normal (does not support anorexia), Rumination 7/10 – normal
+
+[STEP 03] Disease Evaluation #2: Lumpy Skin Disease
+  Agent        : DISEASE_REASONING_ENGINE
+  Finding      : Probability 7.7% – MINIMAL confidence
+  Confidence   : 7.7%
+  Evidence     :
+    - Temperature 38.5°C marginally outside range (partial match)
+  Notes        : Missing: Heart rate 65 BPM below expected range for Lumpy Skin Disease, Milk production 22.0 L/day – not significantly reduced, Appetite score 8/10 – normal (does not support anorexia)
+
+[STEP 04] Disease Evaluation #3: Black Quarter
+  Agent        : DISEASE_REASONING_ENGINE
+  Finding      : Probability 4.4% – MINIMAL confidence
+  Confidence   : 4.4%
+  Evidence     :
+    - Temperature 38.5°C marginally outside range (partial match)
+  Notes        : Missing: Heart rate 65 BPM below expected range for Black Quarter, Motion 1.02 – normal/high activity (does not suggest severe lethargy), Appetite score 8/10 – normal (does not support anorexia)
+
+════════════════════════════════════════════════════════════

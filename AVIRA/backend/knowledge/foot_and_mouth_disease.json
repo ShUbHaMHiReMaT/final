@@ -1,0 +1,87 @@
+{
+  "disease_id": "FMD",
+  "name": "Foot and Mouth Disease",
+  "category": "Viral",
+  "pathogen": "Foot-and-Mouth Disease Virus (FMDV) – Aphthovirus, 7 serotypes",
+  "description": "A highly contagious viral disease of cloven-hoofed animals. Characterised by vesicular lesions of the mouth and feet. One of the world's most economically devastating livestock diseases.",
+  "urgency": "CRITICAL",
+  "vet_required": true,
+  "reportable_disease": true,
+  "diagnostic_criteria": {
+    "temperature": {
+      "min": 40.0,
+      "max": 41.5,
+      "unit": "°C",
+      "weight": 0.15
+    },
+    "heart_rate": {
+      "min": 70,
+      "max": 110,
+      "unit": "BPM",
+      "weight": 0.05
+    },
+    "milk_production": {
+      "drop_threshold_percent": 50,
+      "weight": 0.15
+    },
+    "appetite": {
+      "max_score": 3,
+      "weight": 0.15
+    },
+    "rumination": {
+      "max_score": 3,
+      "weight": 0.10
+    },
+    "motion_magnitude": {
+      "max": 0.6,
+      "description": "Severe lameness due to foot lesions",
+      "weight": 0.15
+    },
+    "physical_symptoms": [
+      { "symptom": "mouth_lesions", "weight": 0.35 },
+      { "symptom": "foot_lesions", "weight": 0.35 },
+      { "symptom": "excessive_salivation", "weight": 0.25 },
+      { "symptom": "vesicles_on_tongue", "weight": 0.30 },
+      { "symptom": "lameness", "weight": 0.20 },
+      { "symptom": "teat_lesions", "weight": 0.15 }
+    ]
+  },
+  "clinical_signs": [
+    "Blister-like vesicles on tongue, gums, lips, and between the toes",
+    "Severe lameness – reluctance to move",
+    "Copious, ropy salivation",
+    "High fever (≥40°C) at onset",
+    "Dramatic drop in milk yield",
+    "Smacking of lips, grinding teeth",
+    "Loss of appetite and weight",
+    "Secondary bacterial infections of ruptured vesicles"
+  ],
+  "differential_diagnoses": [
+    "Vesicular Stomatitis",
+    "Rinderpest",
+    "Mucosal Disease",
+    "Bluetongue",
+    "Bovine Viral Diarrhoea (BVD)"
+  ],
+  "vision_markers": [
+    "mouth_lesions",
+    "foot_lesions",
+    "tongue_blisters",
+    "excessive_salivation"
+  ],
+  "recommendations": [
+    "EMERGENCY: FMD is a notifiable disease in most countries",
+    "Immediate quarantine of entire premises",
+    "Contact government veterinary services immediately",
+    "Do NOT move animals off the premises",
+    "Disinfect all vehicles, equipment, and clothing",
+    "Provide soft feed and fresh water – painful to eat",
+    "Clean and disinfect foot lesions gently",
+    "Vaccinate susceptible stock after outbreak confirmed by authority"
+  ],
+  "references": [
+    "OIE Terrestrial Animal Health Code – Chapter 8.8",
+    "FAO Guidelines for FMD Prevention and Control",
+    "USDA APHIS FMD Disease Fact Sheet 2022"
+  ]
+}

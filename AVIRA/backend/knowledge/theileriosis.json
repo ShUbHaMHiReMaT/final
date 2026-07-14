@@ -1,0 +1,65 @@
+{
+  "disease_id": "THEILERIOSIS",
+  "name": "Theileriosis (Corridor Disease)",
+  "category": "Tick-Borne Protozoal",
+  "urgency": "CRITICAL",
+  "vet_required": true,
+  "reportable_disease": false,
+  "description": "Tick-borne protozoal disease caused by Theileria species. Spreads via tick bites. Can be fatal without treatment. Also known as East Coast Fever.",
+  "vital_sign_ranges": {
+    "temperature_min": 40.0,
+    "temperature_max": 42.0,
+    "heart_rate_min": 90,
+    "heart_rate_max": 130
+  },
+  "clinical_signs": [
+    "high fever 40-42°C",
+    "enlarged lymph nodes",
+    "nasal discharge",
+    "lacrimation",
+    "rapid breathing",
+    "anaemia",
+    "jaundice in some cases",
+    "loss of appetite",
+    "weight loss",
+    "weakness",
+    "tick infestation visible"
+  ],
+  "vision_markers": [
+    "pale mucous membranes",
+    "jaundice yellowish eyes or skin",
+    "nasal discharge",
+    "tick attachment sites",
+    "emaciation"
+  ],
+  "key_symptoms": ["high fever", "lymph node swelling", "anaemia", "ticks", "nasal discharge"],
+  "diagnostic_criteria": {
+    "definitive": "Blood smear – Theileria piroplasms in red blood cells",
+    "supportive": ["Fever 40-42°C", "Tick exposure", "Lymphadenopathy", "Anaemia"]
+  },
+  "manual_input_indicators": {
+    "appetite": "very_low",
+    "milk_production": "very_low",
+    "observations_keywords": [
+      "tick", "anaemia", "pale", "jaundice", "lymph node", "swollen gland", "theileria", "east coast fever"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "Specific anti-protozoal drugs (e.g., Buparvaquone) prescribed by vet",
+    "supportive_care": [
+      "Strict tick control and acaricide treatment",
+      "Fluid support if dehydrated",
+      "Anti-fever medications",
+      "High-quality feed support during recovery"
+    ],
+    "first_aid": "Isolate animal. Remove visible ticks manually. Call vet immediately.",
+    "do_not": "Do not administer anti-protozoal drugs without vet prescription"
+  },
+  "key_evidence_weights": {
+    "fever_range": 0.30,
+    "hr_elevated": 0.20,
+    "tick_exposure": 0.25,
+    "anaemia": 0.15,
+    "lymphadenopathy": 0.10
+  }
+}

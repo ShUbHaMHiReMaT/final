@@ -1,0 +1,35 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – AI Prediction Output
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-14T11:06:45.356945+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_C53B5EF9FCDD
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+Generated At    : 2026-07-14T11:06:45.356945+00:00
+
+[HEALTH STATUS]
+  Alert Level   : NORMAL
+  Overall Score : 0.0
+
+[DISEASE PROBABILITIES]
+
+[RECOMMENDATIONS]
+  • Continue daily monitoring. Record and upload sensor readings at consistent times each day.
+
+[VET REQUIRED]
+  False
+
+[RAW JSON PAYLOAD]
+{
+  "alert_level": "NORMAL",
+  "overall_health_score": 0.0,
+  "disease_probabilities": [],
+  "recommendations": [
+    "Continue daily monitoring. Record and upload sensor readings at consistent times each day."
+  ],
+  "vet_required": false
+}
+
+════════════════════════════════════════════════════════════

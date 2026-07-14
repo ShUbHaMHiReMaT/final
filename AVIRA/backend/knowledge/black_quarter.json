@@ -1,0 +1,73 @@
+{
+  "disease_id": "BQ",
+  "name": "Black Quarter",
+  "category": "Bacterial – Clostridial",
+  "pathogen": "Clostridium chauvoei",
+  "description": "An acute, highly fatal bacterial infection of cattle causing toxaemia and emphysematous myositis. Primarily affects young cattle (6 months – 2 years).",
+  "urgency": "CRITICAL",
+  "vet_required": true,
+  "reportable_disease": false,
+  "diagnostic_criteria": {
+    "temperature": {
+      "min": 40.0,
+      "max": 42.0,
+      "unit": "°C",
+      "weight": 0.20
+    },
+    "heart_rate": {
+      "min": 90,
+      "max": 140,
+      "unit": "BPM",
+      "weight": 0.15
+    },
+    "motion_magnitude": {
+      "max": 0.5,
+      "description": "Very low – severe lameness or recumbency",
+      "weight": 0.20
+    },
+    "appetite": {
+      "max_score": 2,
+      "weight": 0.15
+    },
+    "physical_symptoms": [
+      { "symptom": "leg_swelling", "weight": 0.30 },
+      { "symptom": "crepitus_on_palpation", "weight": 0.30 },
+      { "symptom": "sudden_lameness", "weight": 0.25 },
+      { "symptom": "gaseous_swelling", "weight": 0.25 },
+      { "symptom": "dark_discolouration_of_muscle", "weight": 0.20 }
+    ]
+  },
+  "clinical_signs": [
+    "Sudden onset high fever (≥41°C)",
+    "Severe lameness – animal unable to bear weight",
+    "Hot, painful, gas-filled swelling of hindquarters or shoulders",
+    "Characteristic crackling sound (crepitus) on pressing affected area",
+    "Rapid deterioration – death within 12–36 hours if untreated",
+    "Depression and cessation of eating",
+    "Dark, gangrenous muscle tissue post-mortem"
+  ],
+  "differential_diagnoses": [
+    "Haemorrhagic Septicaemia",
+    "Anthrax",
+    "Malignant oedema",
+    "Snake bite"
+  ],
+  "vision_markers": [
+    "leg_swelling",
+    "lameness"
+  ],
+  "recommendations": [
+    "EMERGENCY: Contact veterinarian immediately – mortality rate very high",
+    "Early high-dose penicillin may be effective in early stages",
+    "Vaccinate herd with Clostridial vaccine annually",
+    "Do not disturb or move animal unnecessarily",
+    "Isolate to prevent contaminating pasture with spores",
+    "Do NOT open or drain swellings – spreads infection",
+    "Review vaccination programme for young stock"
+  ],
+  "references": [
+    "CFSPH Black Leg Fact Sheet 2017",
+    "Merck Veterinary Manual – Clostridial Myositis",
+    "FAO-OIE-WHO Animal Health Yearbook"
+  ]
+}

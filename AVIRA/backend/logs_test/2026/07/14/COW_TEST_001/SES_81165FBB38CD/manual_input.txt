@@ -1,0 +1,29 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – Manual Farmer Input
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-14T11:15:23.409559+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_81165FBB38CD
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+Entered At      : 2026-07-14T11:15:23.409559+00:00
+
+[MEASUREMENTS]
+  Temperature   : 38.5 °C
+  Milk Prod.    : N/A litres/day
+  Appetite      : N/A /10
+  Rumination    : N/A /10
+  Water Intake  : N/A litres/day
+  Feed Intake   : N/A kg/day
+
+[OBSERVATIONS]
+  None provided
+
+[RAW JSON PAYLOAD]
+{
+  "cow_id": "COW_TEST_001",
+  "temperature": 38.5
+}
+
+════════════════════════════════════════════════════════════

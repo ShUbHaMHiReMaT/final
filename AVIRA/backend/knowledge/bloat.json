@@ -1,0 +1,62 @@
+{
+  "disease_id": "BLOAT",
+  "name": "Bloat (Ruminal Tympany)",
+  "category": "Digestive",
+  "urgency": "CRITICAL",
+  "vet_required": true,
+  "reportable_disease": false,
+  "description": "Accumulation of gas in the rumen that cannot be eructated. Can be frothy bloat (legume pasture) or free gas bloat (obstruction). Can be fatal within hours.",
+  "vital_sign_ranges": {
+    "temperature_min": 37.5,
+    "temperature_max": 39.3,
+    "heart_rate_min": 80,
+    "heart_rate_max": 120
+  },
+  "clinical_signs": [
+    "normal to mildly elevated temperature",
+    "rapid heart rate 80-120 bpm",
+    "distended left abdomen (rumen visible from behind)",
+    "complete cessation of rumination stops eating",
+    "distress bellowing",
+    "kicking at belly",
+    "extension of neck",
+    "staggering or falling",
+    "mouth breathing",
+    "cyanosis blue membranes in severe cases"
+  ],
+  "vision_markers": [
+    "visibly distended left flank (apple-shaped from behind)",
+    "drum-like sound on left flank percussion",
+    "animal kicking belly",
+    "extension of head and neck",
+    "open mouth breathing distress"
+  ],
+  "key_symptoms": ["distended abdomen", "stops eating", "stops rumination", "kicking belly", "distress"],
+  "diagnostic_criteria": {
+    "definitive": "Distended rumen on palpation/percussion. Stomach tube releases gas.",
+    "supportive": ["Sudden cessation of rumination", "Left flank distension", "Recent pasture change", "Distress"]
+  },
+  "manual_input_indicators": {
+    "appetite": "none",
+    "rumination": "none",
+    "observations_keywords": [
+      "bloat", "bloated", "distended", "swollen belly", "not eating", "kicking abdomen", "tympany"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "Stomach tube to release gas. Anti-foaming agents (poloxalene or simethicone) for frothy bloat. Trochar in life-threatening cases – vet only.",
+    "supportive_care": [
+      "Walk animal slowly to stimulate belching",
+      "Keep head elevated",
+      "Anti-foaming drench if frothy type (poloxalene)"
+    ],
+    "first_aid": "Walk cow slowly. Keep head higher than body. Call vet URGENTLY. Do NOT leave unattended.",
+    "do_not": "Do not let animal lie flat. Do not drench if unconscious."
+  },
+  "key_evidence_weights": {
+    "hr_elevated": 0.15,
+    "stops_rumination": 0.40,
+    "belly_distension": 0.35,
+    "stops_eating": 0.10
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "disease_id": "LSD",
+  "name": "Lumpy Skin Disease",
+  "category": "Viral",
+  "pathogen": "Lumpy Skin Disease Virus (LSDV) – Capripoxvirus",
+  "description": "A viral disease of cattle characterised by nodular skin lesions, fever, and generalised lymphadenopathy. Spread primarily by biting insects.",
+  "urgency": "CRITICAL",
+  "vet_required": true,
+  "reportable_disease": true,
+  "diagnostic_criteria": {
+    "temperature": {
+      "min": 40.0,
+      "max": 41.5,
+      "unit": "°C",
+      "weight": 0.25
+    },
+    "heart_rate": {
+      "min": 80,
+      "max": 120,
+      "unit": "BPM",
+      "weight": 0.10
+    },
+    "milk_production": {
+      "drop_threshold_percent": 40,
+      "weight": 0.10
+    },
+    "appetite": {
+      "max_score": 4,
+      "weight": 0.10
+    },
+    "physical_symptoms": [
+      { "symptom": "skin_nodules", "weight": 0.30 },
+      { "symptom": "swelling_lymph_nodes", "weight": 0.15 },
+      { "symptom": "eye_discharge", "weight": 0.10 },
+      { "symptom": "nasal_discharge", "weight": 0.10 },
+      { "symptom": "excessive_salivation", "weight": 0.10 },
+      { "symptom": "limb_edema", "weight": 0.10 }
+    ]
+  },
+  "clinical_signs": [
+    "Firm, raised skin nodules (2–5 cm diameter)",
+    "High fever (≥40°C)",
+    "Enlarged superficial lymph nodes",
+    "Nasal and ocular discharge",
+    "Depression and anorexia",
+    "Reduced milk yield",
+    "Oedema of the limbs, brisket, and genitalia"
+  ],
+  "differential_diagnoses": [
+    "Pseudo-lumpy Skin Disease (Bovine herpesvirus-2)",
+    "Insect bite reactions",
+    "Demodicosis",
+    "Urticaria",
+    "Ringworm"
+  ],
+  "vision_markers": [
+    "skin_nodules",
+    "limb_swelling",
+    "eye_discharge",
+    "nasal_discharge"
+  ],
+  "recommendations": [
+    "Isolate affected animal immediately",
+    "Contact veterinarian urgently – LSD is a notifiable disease",
+    "Do NOT administer medications without veterinary guidance",
+    "Implement vector (insect) control measures",
+    "Quarantine the herd from new arrivals",
+    "Report to local animal health authorities",
+    "Document all lesion locations with photographs",
+    "Ensure adequate nutrition and fresh water"
+  ],
+  "references": [
+    "OIE Terrestrial Animal Health Code – Chapter 11.8",
+    "FAO Animal Production and Health Guidelines – LSD",
+    "CFSPH Lumpy Skin Disease Fact Sheet 2019"
+  ]
+}

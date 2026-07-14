@@ -1,0 +1,73 @@
+{
+  "disease_id": "MASTITIS",
+  "name": "Mastitis",
+  "category": "Bacterial / Inflammatory",
+  "pathogen": "Staphylococcus aureus, Streptococcus agalactiae, E. coli, Klebsiella spp.",
+  "description": "Inflammation of the mammary gland, typically caused by bacterial infection. One of the most economically significant diseases in dairy cattle.",
+  "urgency": "HIGH",
+  "vet_required": true,
+  "reportable_disease": false,
+  "diagnostic_criteria": {
+    "temperature": {
+      "min": 39.5,
+      "max": 41.0,
+      "unit": "°C",
+      "weight": 0.15
+    },
+    "heart_rate": {
+      "min": 70,
+      "max": 100,
+      "unit": "BPM",
+      "weight": 0.05
+    },
+    "milk_production": {
+      "drop_threshold_percent": 30,
+      "weight": 0.30
+    },
+    "appetite": {
+      "max_score": 5,
+      "weight": 0.10
+    },
+    "physical_symptoms": [
+      { "symptom": "udder_swelling", "weight": 0.35 },
+      { "symptom": "udder_redness", "weight": 0.20 },
+      { "symptom": "abnormal_milk", "weight": 0.25 },
+      { "symptom": "udder_heat", "weight": 0.20 },
+      { "symptom": "udder_pain", "weight": 0.15 }
+    ]
+  },
+  "clinical_signs": [
+    "Swollen, red, hot, or painful udder quarter",
+    "Abnormal milk (clots, watery, blood-tinged)",
+    "Significant reduction in milk yield",
+    "Mild to moderate fever (39.5–41°C)",
+    "Depression and reduced feed intake",
+    "Kicking when milked"
+  ],
+  "differential_diagnoses": [
+    "Udder oedema (parturient)",
+    "Blackleg of the udder",
+    "Teat obstruction",
+    "Traumatic injury to udder"
+  ],
+  "vision_markers": [
+    "udder_swelling",
+    "udder_redness",
+    "abnormal_milk_appearance"
+  ],
+  "recommendations": [
+    "Consult a veterinarian for appropriate antibiotic therapy",
+    "Strip affected quarters frequently (3–4 times daily)",
+    "Keep animal separate from healthy stock",
+    "Maintain strict hygiene during milking",
+    "Perform California Mastitis Test (CMT) if available",
+    "Review milking machine for faults",
+    "Ensure clean, dry bedding",
+    "Maintain adequate hydration and nutrition"
+  ],
+  "references": [
+    "National Mastitis Council Guidelines 2021",
+    "FAO Mastitis Control in Developing Countries",
+    "ICAR Mastitis Recording Recommendations"
+  ]
+}

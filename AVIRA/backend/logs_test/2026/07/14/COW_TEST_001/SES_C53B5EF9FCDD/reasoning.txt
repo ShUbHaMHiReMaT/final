@@ -1,0 +1,22 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – AI Reasoning Chain
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-14T11:06:45.356945+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_C53B5EF9FCDD
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+Generated At    : 2026-07-14T11:06:45.356945+00:00
+
+[STEP 01] Stress index: 0.000
+
+[STEP 02] Alert level: NORMAL
+
+[STEP 03] Breed: DEFAULT
+
+[STEP 04] Top disease: Heat Stress (25%)
+
+[STEP 05] Top 3: Heat Stress, Milk Fever, Brucellosis
+
+════════════════════════════════════════════════════════════

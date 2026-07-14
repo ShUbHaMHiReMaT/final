@@ -1,0 +1,62 @@
+{
+  "disease_id": "MILK_FEVER",
+  "name": "Milk Fever (Hypocalcaemia)",
+  "category": "Metabolic",
+  "urgency": "CRITICAL",
+  "vet_required": true,
+  "reportable_disease": false,
+  "description": "Metabolic disease caused by low blood calcium (hypocalcaemia). Occurs around calving. Life-threatening if untreated. Most common in high-producing dairy cows at 2nd–5th calving.",
+  "vital_sign_ranges": {
+    "temperature_min": 36.0,
+    "temperature_max": 38.5,
+    "heart_rate_min": 90,
+    "heart_rate_max": 120
+  },
+  "clinical_signs": [
+    "low or normal temperature 36-38.5°C",
+    "rapid weak heart rate 90-120 bpm",
+    "muscle weakness trembling",
+    "inability to rise (recumbency)",
+    "cold extremities ears legs",
+    "dry muzzle",
+    "loss of consciousness in stage 3",
+    "bloat may occur secondarily",
+    "occurs within 48 hours of calving"
+  ],
+  "vision_markers": [
+    "unable to stand flat out on side",
+    "S-shaped neck kink in stage 2",
+    "muscle trembling",
+    "cold ears and legs",
+    "dull unresponsive"
+  ],
+  "key_symptoms": ["recumbency", "muscle weakness", "cold extremities", "post-calving", "rapid weak pulse"],
+  "diagnostic_criteria": {
+    "definitive": "Blood calcium < 1.5 mmol/L",
+    "supportive": ["Post-calving", "Recumbency", "Cold extremities", "Weak rapid pulse", "Dry muzzle"]
+  },
+  "manual_input_indicators": {
+    "observations_keywords": [
+      "cannot stand", "milk fever", "calving", "hypocalcaemia", "recumbent", "cold legs", "muscle tremor"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "IV calcium borogluconate infusion – vet administered. Oral calcium supplements for prevention.",
+    "supportive_care": [
+      "Position cow in sternal recumbency (on belly, not flat on side)",
+      "Keep warm with blankets",
+      "Do not milk fully for 24-48 hours post-treatment",
+      "Provide fresh water and good hay",
+      "Monitor for relapse (common)"
+    ],
+    "first_aid": "Roll cow onto chest (sternal). Keep warm. Do NOT give water by drench. Call vet URGENTLY.",
+    "do_not": "Do not give calcium IV without vet – can cause cardiac arrest if given too fast."
+  },
+  "key_evidence_weights": {
+    "low_temp": 0.20,
+    "hr_elevated": 0.20,
+    "post_calving": 0.30,
+    "recumbency": 0.20,
+    "cold_extremities": 0.10
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "disease_id": "TICK_FEVER",
+  "name": "Tick Fever (General Tick-Borne Disease)",
+  "category": "Tick-Borne",
+  "urgency": "HIGH",
+  "vet_required": true,
+  "reportable_disease": false,
+  "description": "General term for tick-borne febrile illness including Anaplasmosis, mixed Babesia/Theileria infections. Common during tick season in tropical and subtropical regions.",
+  "vital_sign_ranges": {
+    "temperature_min": 40.0,
+    "temperature_max": 42.0,
+    "heart_rate_min": 90,
+    "heart_rate_max": 130
+  },
+  "clinical_signs": [
+    "high fever 40-42°C",
+    "rapid heart rate 90-130 bpm",
+    "loss of appetite",
+    "weakness lethargy",
+    "anaemia pale mucous membranes",
+    "nasal and eye discharge",
+    "reduced milk production",
+    "jaundice in some cases",
+    "visible tick infestation",
+    "rapid breathing",
+    "enlarged lymph nodes"
+  ],
+  "vision_markers": [
+    "ticks visible on skin especially ears axilla groin",
+    "pale or yellow mucous membranes",
+    "nasal discharge",
+    "dull depressed posture",
+    "weakness unable to move freely"
+  ],
+  "key_symptoms": ["high fever", "tick infestation", "anaemia", "weakness", "rapid HR"],
+  "diagnostic_criteria": {
+    "definitive": "Blood smear for tick-borne parasites. Tick count.",
+    "supportive": ["Fever 40-42°C", "Visible ticks", "Anaemia", "Rapid HR", "Seasonal tick prevalence"]
+  },
+  "manual_input_indicators": {
+    "appetite": "very_low",
+    "milk_production": "very_low",
+    "observations_keywords": [
+      "tick", "tick fever", "anaplasmosis", "fever", "ticks on body", "pale gums", "weakness", "anaemia"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "Antibiotics for Anaplasmosis (oxytetracycline). Anti-protozoals for Babesia/Theileria. Vet diagnosis required to select correct drug.",
+    "supportive_care": [
+      "Remove ticks manually with tick removers",
+      "Apply acaricide (tick spray/dip) under vet guidance",
+      "IV fluids if severely dehydrated",
+      "Anti-fever medication",
+      "Good nutrition support"
+    ],
+    "first_aid": "Remove visible ticks. Move to cool shade. Provide fresh water. Call vet.",
+    "do_not": "Do not crush ticks – can release infected material. Do not use same acaricide repeatedly."
+  },
+  "key_evidence_weights": {
+    "fever_range": 0.30,
+    "hr_elevated": 0.20,
+    "tick_exposure": 0.30,
+    "anaemia": 0.15,
+    "appetite_loss": 0.05
+  }
+}

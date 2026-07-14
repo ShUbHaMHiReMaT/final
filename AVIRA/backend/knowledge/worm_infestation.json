@@ -1,0 +1,66 @@
+{
+  "disease_id": "WORM_INFESTATION",
+  "name": "Worm Infestation (Helminthiasis / GI Parasites)",
+  "category": "Parasitic",
+  "urgency": "MEDIUM",
+  "vet_required": false,
+  "reportable_disease": false,
+  "description": "Gastrointestinal parasitism by roundworms, tapeworms or flukes. Usually shows as slow production loss. Severe in young calves and during monsoon. Can cause bottle jaw, anaemia and death in heavy burdens.",
+  "vital_sign_ranges": {
+    "temperature_min": 37.8,
+    "temperature_max": 39.3,
+    "heart_rate_min": 48,
+    "heart_rate_max": 90
+  },
+  "clinical_signs": [
+    "usually normal temperature",
+    "slightly elevated heart rate in severe cases",
+    "progressive weight loss poor body condition",
+    "rough dull coat",
+    "diarrhoea or soft faeces",
+    "bottle jaw submandibular oedema",
+    "anaemia pale mucous membranes",
+    "reduced milk production",
+    "reduced feed conversion",
+    "pot-bellied appearance in calves",
+    "visible worms in faeces in some cases"
+  ],
+  "vision_markers": [
+    "rough patchy coat",
+    "emaciation thin body condition",
+    "bottle jaw swelling under jaw",
+    "pale mucous membranes",
+    "pot-bellied abdomen in calves",
+    "loose faeces on hindquarters"
+  ],
+  "key_symptoms": ["weight loss", "rough coat", "diarrhoea", "bottle jaw", "anaemia"],
+  "diagnostic_criteria": {
+    "definitive": "Faecal Egg Count (FEC) > 500 epg. Worm species identification.",
+    "supportive": ["Progressive weight loss", "Diarrhoea", "Anaemia", "Bottle jaw", "Poor coat condition"]
+  },
+  "manual_input_indicators": {
+    "appetite": "low_moderate",
+    "milk_production": "low",
+    "observations_keywords": [
+      "worm", "parasite", "helminth", "diarrhoea", "wasting", "rough coat", "bottle jaw", "pale gums"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "Strategic anthelmintic (dewormer) treatment. Vet selects product based on local resistance patterns.",
+    "supportive_care": [
+      "Good nutrition to support recovery",
+      "Rotational grazing to break parasite cycle",
+      "Clean water and hygienic bedding",
+      "Iron supplementation for anaemic animals"
+    ],
+    "first_aid": "Isolate if severely affected. Provide high-quality feed. Contact vet for deworming protocol.",
+    "do_not": "Do not deworm repeatedly with same drug – resistance develops. Test before treating."
+  },
+  "key_evidence_weights": {
+    "weight_loss": 0.30,
+    "diarrhoea": 0.20,
+    "anaemia": 0.20,
+    "bottle_jaw": 0.20,
+    "low_milk": 0.10
+  }
+}

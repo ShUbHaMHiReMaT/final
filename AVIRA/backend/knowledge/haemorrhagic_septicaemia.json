@@ -1,0 +1,81 @@
+{
+  "disease_id": "HS",
+  "name": "Haemorrhagic Septicaemia",
+  "category": "Bacterial",
+  "pathogen": "Pasteurella multocida (serotypes B:2 and E:2)",
+  "description": "A highly fatal, acute septicaemic disease of cattle and buffaloes caused by Pasteurella multocida. Also known as Shipping Fever in temperate regions.",
+  "urgency": "CRITICAL",
+  "vet_required": true,
+  "reportable_disease": true,
+  "diagnostic_criteria": {
+    "temperature": {
+      "min": 40.5,
+      "max": 42.0,
+      "unit": "°C",
+      "weight": 0.25
+    },
+    "heart_rate": {
+      "min": 80,
+      "max": 130,
+      "unit": "BPM",
+      "weight": 0.15
+    },
+    "spo2": {
+      "max": 92.0,
+      "description": "Respiratory distress reduces SpO2",
+      "weight": 0.20
+    },
+    "motion_magnitude": {
+      "max": 0.4,
+      "description": "Very low – severe depression, reluctance to move",
+      "weight": 0.15
+    },
+    "appetite": {
+      "max_score": 2,
+      "weight": 0.10
+    },
+    "physical_symptoms": [
+      { "symptom": "throat_swelling", "weight": 0.35 },
+      { "symptom": "excessive_salivation", "weight": 0.20 },
+      { "symptom": "respiratory_distress", "weight": 0.30 },
+      { "symptom": "nasal_discharge", "weight": 0.20 },
+      { "symptom": "oedema_of_brisket", "weight": 0.15 }
+    ]
+  },
+  "clinical_signs": [
+    "Very high fever (≥41°C)",
+    "Profuse salivation and nasal discharge",
+    "Painful, hot, doughy swelling of throat, dewlap, and brisket",
+    "Severe respiratory distress – animal may breathe with mouth open",
+    "Complete anorexia and profound depression",
+    "Death may occur within 6–24 hours of signs appearing",
+    "Petechial haemorrhages visible on mucous membranes"
+  ],
+  "differential_diagnoses": [
+    "Anthrax",
+    "Black Quarter",
+    "Rinderpest",
+    "Foot and Mouth Disease",
+    "Actinobacillosis"
+  ],
+  "vision_markers": [
+    "throat_swelling",
+    "nasal_discharge",
+    "brisket_oedema"
+  ],
+  "recommendations": [
+    "EMERGENCY: Immediate veterinary intervention required",
+    "Oxytetracycline or sulphonamides are treatment of choice",
+    "Vaccinate all animals annually with HS vaccine",
+    "Isolate sick animal and disinfect shared water sources",
+    "Notify local animal health authorities (notifiable disease)",
+    "Avoid transporting sick animals",
+    "Provide shade and reduce heat stress",
+    "Check for predisposing factors: overcrowding, malnutrition"
+  ],
+  "references": [
+    "OIE Terrestrial Manual – Haemorrhagic Septicaemia 2019",
+    "FAO Animal Health Manual No. 8",
+    "Radostits et al., Veterinary Medicine 10th Ed."
+  ]
+}

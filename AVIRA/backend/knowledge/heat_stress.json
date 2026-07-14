@@ -1,0 +1,69 @@
+{
+  "disease_id": "HEAT_STRESS",
+  "name": "Heat Stress (Hyperthermia)",
+  "category": "Environmental",
+  "urgency": "HIGH",
+  "vet_required": false,
+  "reportable_disease": false,
+  "description": "Occurs when cattle cannot dissipate body heat in high ambient temperature and humidity. High-producing dairy cows most susceptible. Can cause severe production and reproductive losses.",
+  "vital_sign_ranges": {
+    "temperature_min": 39.5,
+    "temperature_max": 41.0,
+    "heart_rate_min": 80,
+    "heart_rate_max": 110
+  },
+  "clinical_signs": [
+    "elevated body temperature 39.5-41°C",
+    "increased respiration rate panting",
+    "increased water intake",
+    "standing in shade or water",
+    "bunching in groups",
+    "reduced feed intake",
+    "drop in milk production",
+    "reduced rumination",
+    "reduced activity low motion",
+    "drooling salivation",
+    "restlessness"
+  ],
+  "vision_markers": [
+    "panting open mouth breathing",
+    "excessive drooling salivation",
+    "seeking shade or water",
+    "low activity",
+    "bunching behaviour"
+  ],
+  "key_symptoms": ["elevated temp", "panting", "high water intake", "reduced rumination", "milk drop"],
+  "diagnostic_criteria": {
+    "definitive": "Temperature >39.5°C combined with hot weather conditions and clinical signs",
+    "supportive": ["Elevated temperature", "Panting", "Reduced feed intake", "Low motion", "High ambient temperature"]
+  },
+  "manual_input_indicators": {
+    "appetite": "low",
+    "water_intake": "very_high",
+    "rumination": "low",
+    "milk_production": "low",
+    "observations_keywords": [
+      "heat stress", "panting", "hot", "shade", "drooling", "sweating", "hyperthermia"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "Cooling therapy, IV fluids in severe cases. Electrolyte supplementation.",
+    "supportive_care": [
+      "Provide shade and cool water immediately",
+      "Spray cool water on body (especially neck and flank)",
+      "Install fans or increase ventilation",
+      "Provide electrolyte supplements",
+      "Feed during cooler hours (early morning / evening)",
+      "Avoid handling during peak heat"
+    ],
+    "first_aid": "Move to shade. Spray with cool (not ice cold) water. Offer fresh cool water. Reduce handling.",
+    "do_not": "Do not use ice-cold water directly – can cause shock. Do not move animals unnecessarily."
+  },
+  "key_evidence_weights": {
+    "fever_mild": 0.25,
+    "hr_mild_elevated": 0.15,
+    "low_motion": 0.20,
+    "high_water_intake": 0.20,
+    "low_rumination": 0.20
+  }
+}

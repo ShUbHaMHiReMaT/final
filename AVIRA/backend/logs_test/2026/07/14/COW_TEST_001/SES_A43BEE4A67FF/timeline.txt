@@ -1,0 +1,10 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – Session Timeline
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-14T11:04:13.105598+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_A43BEE4A67FF
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+[2026-07-14T11:04:13.105598+00:00] [MANUAL_UPLOAD] {"temperature": 38.5, "appetite": null, "milk_production": null, "has_observations": false}

@@ -1,0 +1,58 @@
+{
+  "disease_id": "BRUCELLOSIS",
+  "name": "Brucellosis (Contagious Abortion)",
+  "category": "Bacterial Zoonosis",
+  "urgency": "HIGH",
+  "vet_required": true,
+  "reportable_disease": true,
+  "description": "Bacterial infection (Brucella abortus) causing reproductive failure. Major zoonosis – can infect humans. Reportable disease in most countries.",
+  "vital_sign_ranges": {
+    "temperature_min": 37.8,
+    "temperature_max": 39.3,
+    "heart_rate_min": 48,
+    "heart_rate_max": 84
+  },
+  "clinical_signs": [
+    "usually normal temperature",
+    "usually normal heart rate",
+    "abortion in last trimester (after 5th month)",
+    "retained placenta after abortion",
+    "reduced fertility repeat breeding",
+    "swollen joints arthritis",
+    "orchitis in bulls",
+    "weak or stillborn calves",
+    "reduced milk production"
+  ],
+  "vision_markers": [
+    "vaginal discharge",
+    "retained placenta visible",
+    "swollen joints",
+    "emaciation"
+  ],
+  "key_symptoms": ["late-term abortion", "retained placenta", "repeat breeding", "normal vitals"],
+  "diagnostic_criteria": {
+    "definitive": "Rose Bengal Test, Brucella milk ring test, culture",
+    "supportive": ["Late-term abortion", "Retained placenta", "Infertility", "Normal vital signs"]
+  },
+  "manual_input_indicators": {
+    "observations_keywords": [
+      "abortion", "aborted", "retained placenta", "brucellosis", "repeat breeding", "infertility", "stillborn"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "No treatment – test and slaughter policy in most countries. Vaccination program (RB51 or S19 vaccine) for prevention.",
+    "supportive_care": [
+      "Strict isolation of aborted cow",
+      "Safe disposal of aborted foetus and placenta",
+      "Disinfect calving area thoroughly"
+    ],
+    "first_aid": "ZOONOSIS RISK – wear gloves and PPE when handling aborted material. Report to animal health authorities.",
+    "do_not": "Do not allow aborted material to contaminate feed or water. Do not handle without PPE."
+  },
+  "key_evidence_weights": {
+    "normal_vitals": 0.10,
+    "abortion_history": 0.50,
+    "retained_placenta": 0.25,
+    "infertility": 0.15
+  }
+}

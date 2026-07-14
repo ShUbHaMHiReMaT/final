@@ -1,0 +1,39 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – Raw Sensor Data
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-14T11:06:06.320991+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_56073C2E7DCC
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+Source          : MAX30102 + MPU6500 via Pico
+Received At     : 2026-07-14T11:06:06.320991+00:00
+
+[VITAL SIGNS]
+  Heart Rate    : 65 BPM
+  SpO2          : 97.5 %
+  HR Valid      : True
+  SpO2 Valid    : True
+
+[ACCELEROMETER – MPU6500]
+  Accel X       : 0.012 g
+  Accel Y       : 0.031 g
+  Accel Z       : 0.981 g
+  Motion Mag    : 1.02
+
+[RAW JSON PAYLOAD]
+{
+  "accel_x": 0.012,
+  "accel_y": 0.031,
+  "accel_z": 0.981,
+  "cow_id": "COW_TEST_001",
+  "device_id": "PICO_TEST",
+  "heart_rate": 65,
+  "heart_rate_valid": true,
+  "motion_magnitude": 1.02,
+  "spo2": 97.5,
+  "spo2_valid": true
+}
+
+════════════════════════════════════════════════════════════

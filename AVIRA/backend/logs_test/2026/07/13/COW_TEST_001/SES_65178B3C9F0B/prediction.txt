@@ -1,0 +1,352 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – AI Prediction Output
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-13T20:55:57.713768+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_65178B3C9F0B
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+Generated At    : 2026-07-13T20:55:57.713768+00:00
+
+[HEALTH STATUS]
+  Alert Level   : NORMAL
+  Overall Score : 0.0
+
+[DISEASE PROBABILITIES]
+
+  ► Ketosis
+    Probability  : 8.7%
+    Confidence   : MINIMAL
+    Urgency      : MEDIUM
+    Evidence     :
+      + Temperature 38.5°C within disease range [37.5–38.5°C]
+      + Heart rate 65 BPM matches disease profile
+    Missing      :
+      ? Milk production 22.0 L/day – not significantly reduced
+      ? Appetite score 8/10 – normal (does not support anorexia)
+      ? Rumination 7/10 – normal
+      ? Not reported: sweet acetone breath
+      ? Not reported: weight loss
+      ? Not reported: reduced rumen fill
+      ? Not reported: dull coat
+      ? Not reported: nervous signs
+
+  ► Lumpy Skin Disease
+    Probability  : 7.7%
+    Confidence   : MINIMAL
+    Urgency      : CRITICAL
+    Evidence     :
+      + Temperature 38.5°C marginally outside range (partial match)
+    Missing      :
+      ? Heart rate 65 BPM below expected range for Lumpy Skin Disease
+      ? Milk production 22.0 L/day – not significantly reduced
+      ? Appetite score 8/10 – normal (does not support anorexia)
+      ? Not reported: skin nodules
+      ? Not reported: swelling lymph nodes
+      ? Not reported: eye discharge
+      ? Not reported: nasal discharge
+      ? Not reported: excessive salivation
+      ? Not reported: limb edema
+
+  ► Black Quarter
+    Probability  : 4.4%
+    Confidence   : MINIMAL
+    Urgency      : CRITICAL
+    Evidence     :
+      + Temperature 38.5°C marginally outside range (partial match)
+    Missing      :
+      ? Heart rate 65 BPM below expected range for Black Quarter
+      ? Motion 1.02 – normal/high activity (does not suggest severe lethargy)
+      ? Appetite score 8/10 – normal (does not support anorexia)
+      ? Not reported: leg swelling
+      ? Not reported: crepitus on palpation
+      ? Not reported: sudden lameness
+      ? Not reported: gaseous swelling
+      ? Not reported: dark discolouration of muscle
+
+  ► Mastitis
+    Probability  : 3.8%
+    Confidence   : MINIMAL
+    Urgency      : HIGH
+    Evidence     :
+      + Temperature 38.5°C marginally outside range (partial match)
+    Missing      :
+      ? Heart rate 65 BPM below expected range for Mastitis
+      ? Milk production 22.0 L/day – not significantly reduced
+      ? Appetite score 8/10 – normal (does not support anorexia)
+      ? Not reported: udder swelling
+      ? Not reported: udder redness
+      ? Not reported: abnormal milk
+      ? Not reported: udder heat
+      ? Not reported: udder pain
+
+  ► Foot and Mouth Disease
+    Probability  : 2.9%
+    Confidence   : MINIMAL
+    Urgency      : CRITICAL
+    Evidence     :
+      + Temperature 38.5°C marginally outside range (partial match)
+    Missing      :
+      ? Heart rate 65 BPM below expected range for Foot and Mouth Disease
+      ? Motion 1.02 – normal/high activity (does not suggest severe lethargy)
+      ? Milk production 22.0 L/day – not significantly reduced
+      ? Appetite score 8/10 – normal (does not support anorexia)
+      ? Rumination 7/10 – normal
+      ? Not reported: mouth lesions
+      ? Not reported: foot lesions
+      ? Not reported: excessive salivation
+      ? Not reported: vesicles on tongue
+      ? Not reported: lameness
+      ? Not reported: teat lesions
+
+  ► Haemorrhagic Septicaemia
+    Probability  : 0.0%
+    Confidence   : MINIMAL
+    Urgency      : CRITICAL
+    Evidence     :
+    Missing      :
+      ? Heart rate 65 BPM below expected range for Haemorrhagic Septicaemia
+      ? SpO2 97.5% normal – does not support respiratory compromise
+      ? Motion 1.02 – normal/high activity (does not suggest severe lethargy)
+      ? Appetite score 8/10 – normal (does not support anorexia)
+      ? Not reported: throat swelling
+      ? Not reported: excessive salivation
+      ? Not reported: respiratory distress
+      ? Not reported: nasal discharge
+      ? Not reported: oedema of brisket
+
+[RECOMMENDATIONS]
+  • Continue daily monitoring. Record and upload sensor readings at consistent times each day.
+
+[VET REQUIRED]
+  False
+
+[RAW JSON PAYLOAD]
+{
+  "alert_level": "NORMAL",
+  "overall_health_score": 0.0,
+  "disease_probabilities": [
+    {
+      "disease_id": "KETOSIS",
+      "disease": "Ketosis",
+      "category": "Metabolic",
+      "probability": 0.087,
+      "confidence": "MINIMAL",
+      "urgency": "MEDIUM",
+      "vet_required": false,
+      "reportable": false,
+      "matched_evidence": [
+        "Temperature 38.5\u00b0C within disease range [37.5\u201338.5\u00b0C]",
+        "Heart rate 65 BPM matches disease profile"
+      ],
+      "missing_evidence": [
+        "Milk production 22.0 L/day \u2013 not significantly reduced",
+        "Appetite score 8/10 \u2013 normal (does not support anorexia)",
+        "Rumination 7/10 \u2013 normal",
+        "Not reported: sweet acetone breath",
+        "Not reported: weight loss",
+        "Not reported: reduced rumen fill",
+        "Not reported: dull coat",
+        "Not reported: nervous signs"
+      ],
+      "rejected_evidence": [],
+      "recommendations": [
+        "Administer propylene glycol (300\u2013500 mL orally twice daily) for 3\u20135 days",
+        "Consult veterinarian if neurological signs present (nervous ketosis)",
+        "Increase energy density of ration \u2013 add bypass fat or glucose precursors",
+        "Reduce milking frequency temporarily in severe cases",
+        "Monitor blood or urine ketones (Keto-Test strips)",
+        "Ensure adequate dry matter intake in transition period",
+        "Review body condition score at dry-off (target BCS 3.0\u20133.5)",
+        "Ensure fresh cows have 24/7 access to palatable, high-quality forage"
+      ],
+      "evidence_score": "0.100 / 1.150"
+    },
+    {
+      "disease_id": "LSD",
+      "disease": "Lumpy Skin Disease",
+      "category": "Viral",
+      "probability": 0.0769,
+      "confidence": "MINIMAL",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "reportable": true,
+      "matched_evidence": [
+        "Temperature 38.5\u00b0C marginally outside range (partial match)"
+      ],
+      "missing_evidence": [
+        "Heart rate 65 BPM below expected range for Lumpy Skin Disease",
+        "Milk production 22.0 L/day \u2013 not significantly reduced",
+        "Appetite score 8/10 \u2013 normal (does not support anorexia)",
+        "Not reported: skin nodules",
+        "Not reported: swelling lymph nodes",
+        "Not reported: eye discharge",
+        "Not reported: nasal discharge",
+        "Not reported: excessive salivation",
+        "Not reported: limb edema"
+      ],
+      "rejected_evidence": [],
+      "recommendations": [
+        "Isolate affected animal immediately",
+        "Contact veterinarian urgently \u2013 LSD is a notifiable disease",
+        "Do NOT administer medications without veterinary guidance",
+        "Implement vector (insect) control measures",
+        "Quarantine the herd from new arrivals",
+        "Report to local animal health authorities",
+        "Document all lesion locations with photographs",
+        "Ensure adequate nutrition and fresh water"
+      ],
+      "evidence_score": "0.075 / 0.975"
+    },
+    {
+      "disease_id": "BQ",
+      "disease": "Black Quarter",
+      "category": "Bacterial \u2013 Clostridial",
+      "probability": 0.0444,
+      "confidence": "MINIMAL",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "reportable": false,
+      "matched_evidence": [
+        "Temperature 38.5\u00b0C marginally outside range (partial match)"
+      ],
+      "missing_evidence": [
+        "Heart rate 65 BPM below expected range for Black Quarter",
+        "Motion 1.02 \u2013 normal/high activity (does not suggest severe lethargy)",
+        "Appetite score 8/10 \u2013 normal (does not support anorexia)",
+        "Not reported: leg swelling",
+        "Not reported: crepitus on palpation",
+        "Not reported: sudden lameness",
+        "Not reported: gaseous swelling",
+        "Not reported: dark discolouration of muscle"
+      ],
+      "rejected_evidence": [],
+      "recommendations": [
+        "EMERGENCY: Contact veterinarian immediately \u2013 mortality rate very high",
+        "Early high-dose penicillin may be effective in early stages",
+        "Vaccinate herd with Clostridial vaccine annually",
+        "Do not disturb or move animal unnecessarily",
+        "Isolate to prevent contaminating pasture with spores",
+        "Do NOT open or drain swellings \u2013 spreads infection",
+        "Review vaccination programme for young stock"
+      ],
+      "evidence_score": "0.060 / 1.350"
+    },
+    {
+      "disease_id": "MASTITIS",
+      "disease": "Mastitis",
+      "category": "Bacterial / Inflammatory",
+      "probability": 0.0383,
+      "confidence": "MINIMAL",
+      "urgency": "HIGH",
+      "vet_required": true,
+      "reportable": false,
+      "matched_evidence": [
+        "Temperature 38.5\u00b0C marginally outside range (partial match)"
+      ],
+      "missing_evidence": [
+        "Heart rate 65 BPM below expected range for Mastitis",
+        "Milk production 22.0 L/day \u2013 not significantly reduced",
+        "Appetite score 8/10 \u2013 normal (does not support anorexia)",
+        "Not reported: udder swelling",
+        "Not reported: udder redness",
+        "Not reported: abnormal milk",
+        "Not reported: udder heat",
+        "Not reported: udder pain"
+      ],
+      "rejected_evidence": [],
+      "recommendations": [
+        "Consult a veterinarian for appropriate antibiotic therapy",
+        "Strip affected quarters frequently (3\u20134 times daily)",
+        "Keep animal separate from healthy stock",
+        "Maintain strict hygiene during milking",
+        "Perform California Mastitis Test (CMT) if available",
+        "Review milking machine for faults",
+        "Ensure clean, dry bedding",
+        "Maintain adequate hydration and nutrition"
+      ],
+      "evidence_score": "0.045 / 1.175"
+    },
+    {
+      "disease_id": "FMD",
+      "disease": "Foot and Mouth Disease",
+      "category": "Viral",
+      "probability": 0.029,
+      "confidence": "MINIMAL",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "reportable": true,
+      "matched_evidence": [
+        "Temperature 38.5\u00b0C marginally outside range (partial match)"
+      ],
+      "missing_evidence": [
+        "Heart rate 65 BPM below expected range for Foot and Mouth Disease",
+        "Motion 1.02 \u2013 normal/high activity (does not suggest severe lethargy)",
+        "Milk production 22.0 L/day \u2013 not significantly reduced",
+        "Appetite score 8/10 \u2013 normal (does not support anorexia)",
+        "Rumination 7/10 \u2013 normal",
+        "Not reported: mouth lesions",
+        "Not reported: foot lesions",
+        "Not reported: excessive salivation",
+        "Not reported: vesicles on tongue",
+        "Not reported: lameness",
+        "Not reported: teat lesions"
+      ],
+      "rejected_evidence": [],
+      "recommendations": [
+        "EMERGENCY: FMD is a notifiable disease in most countries",
+        "Immediate quarantine of entire premises",
+        "Contact government veterinary services immediately",
+        "Do NOT move animals off the premises",
+        "Disinfect all vehicles, equipment, and clothing",
+        "Provide soft feed and fresh water \u2013 painful to eat",
+        "Clean and disinfect foot lesions gently",
+        "Vaccinate susceptible stock after outbreak confirmed by authority"
+      ],
+      "evidence_score": "0.045 / 1.550"
+    },
+    {
+      "disease_id": "HS",
+      "disease": "Haemorrhagic Septicaemia",
+      "category": "Bacterial",
+      "probability": 0.0,
+      "confidence": "MINIMAL",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "reportable": true,
+      "matched_evidence": [],
+      "missing_evidence": [
+        "Heart rate 65 BPM below expected range for Haemorrhagic Septicaemia",
+        "SpO2 97.5% normal \u2013 does not support respiratory compromise",
+        "Motion 1.02 \u2013 normal/high activity (does not suggest severe lethargy)",
+        "Appetite score 8/10 \u2013 normal (does not support anorexia)",
+        "Not reported: throat swelling",
+        "Not reported: excessive salivation",
+        "Not reported: respiratory distress",
+        "Not reported: nasal discharge",
+        "Not reported: oedema of brisket"
+      ],
+      "rejected_evidence": [
+        "Temperature 38.5\u00b0C outside expected range for Haemorrhagic Septicaemia"
+      ],
+      "recommendations": [
+        "EMERGENCY: Immediate veterinary intervention required",
+        "Oxytetracycline or sulphonamides are treatment of choice",
+        "Vaccinate all animals annually with HS vaccine",
+        "Isolate sick animal and disinfect shared water sources",
+        "Notify local animal health authorities (notifiable disease)",
+        "Avoid transporting sick animals",
+        "Provide shade and reduce heat stress",
+        "Check for predisposing factors: overcrowding, malnutrition"
+      ],
+      "evidence_score": "0.000 / 1.450"
+    }
+  ],
+  "recommendations": [
+    "Continue daily monitoring. Record and upload sensor readings at consistent times each day."
+  ],
+  "vet_required": false
+}
+
+════════════════════════════════════════════════════════════

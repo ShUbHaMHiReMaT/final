@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: avira-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:create_app() --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: LOG_LEVEL
+        value: WARNING
+      - key: AI_CONFIDENCE_THRESHOLD
+        value: "0.35"
+      - key: AI_HIGH_CONFIDENCE
+        value: "0.70"
+      - key: CORS_ORIGINS
+        value: "*"
+    healthCheckPath: /health
+    autoDeploy: true

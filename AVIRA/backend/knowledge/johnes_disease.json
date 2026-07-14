@@ -1,0 +1,60 @@
+{
+  "disease_id": "JOHNES",
+  "name": "Johne's Disease (Paratuberculosis)",
+  "category": "Bacterial Chronic",
+  "urgency": "MEDIUM",
+  "vet_required": true,
+  "reportable_disease": false,
+  "description": "Chronic bacterial disease (Mycobacterium avium paratuberculosis) causing progressive wasting and severe diarrhoea. No cure – long incubation period of 2-10 years.",
+  "vital_sign_ranges": {
+    "temperature_min": 37.8,
+    "temperature_max": 39.3,
+    "heart_rate_min": 48,
+    "heart_rate_max": 84
+  },
+  "clinical_signs": [
+    "usually normal temperature",
+    "usually normal heart rate",
+    "profuse chronic watery diarrhoea",
+    "severe progressive weight loss wasting",
+    "bottle jaw (submandibular oedema)",
+    "decreased milk production",
+    "poor body condition score",
+    "appears in cattle 2-6 years old",
+    "diarrhoea does not respond to treatment"
+  ],
+  "vision_markers": [
+    "very thin emaciated",
+    "bottle jaw visible swelling under jaw",
+    "loose watery stool on hind quarters",
+    "dull rough coat"
+  ],
+  "key_symptoms": ["weight loss", "chronic diarrhoea", "bottle jaw", "normal temperature", "normal HR"],
+  "diagnostic_criteria": {
+    "definitive": "ELISA blood test, faecal PCR, culture",
+    "supportive": ["Chronic diarrhoea", "Weight loss", "Bottle jaw", "Normal vital signs", "Age 2-6 years"]
+  },
+  "manual_input_indicators": {
+    "milk_production": "low",
+    "observations_keywords": [
+      "diarrhoea", "wasting", "weight loss", "bottle jaw", "johnes", "paratuberculosis", "thin"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "No effective treatment. Cull affected animals to prevent herd spread.",
+    "supportive_care": [
+      "Isolate affected animals from healthy herd",
+      "Good nutrition to extend productive life if kept",
+      "Test-and-cull programme for herd control"
+    ],
+    "first_aid": "Isolate cow. Prevent faecal contamination of feed and water. Test herd.",
+    "do_not": "Do not allow infected cows to calve with healthy herd. Do not use milk from affected animals for calves."
+  },
+  "key_evidence_weights": {
+    "chronic_diarrhoea": 0.35,
+    "weight_loss": 0.30,
+    "bottle_jaw": 0.20,
+    "normal_vitals": 0.10,
+    "milk_drop": 0.05
+  }
+}

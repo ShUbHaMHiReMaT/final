@@ -1,0 +1,65 @@
+{
+  "disease_id": "PNEUMONIA",
+  "name": "Pneumonia (Bovine Respiratory Disease)",
+  "category": "Respiratory",
+  "urgency": "HIGH",
+  "vet_required": true,
+  "reportable_disease": false,
+  "description": "Bacterial or viral infection of the lungs. Common in calves and young cattle. Can progress to fatal bronchopneumonia if untreated.",
+  "vital_sign_ranges": {
+    "temperature_min": 40.0,
+    "temperature_max": 41.0,
+    "heart_rate_min": 90,
+    "heart_rate_max": 130
+  },
+  "clinical_signs": [
+    "fever 40-41°C",
+    "rapid breathing laboured respiration",
+    "coughing",
+    "nasal discharge mucopurulent",
+    "eye discharge",
+    "rapid heart rate 90-130 bpm",
+    "loss of appetite",
+    "dullness depression",
+    "mouth breathing",
+    "reluctance to move",
+    "drop in milk production"
+  ],
+  "vision_markers": [
+    "nasal discharge visible",
+    "eye discharge crusty",
+    "laboured breathing visible flank movement",
+    "head lowered depressed posture",
+    "coughing"
+  ],
+  "key_symptoms": ["fever", "cough", "nasal discharge", "laboured breathing", "eye discharge"],
+  "diagnostic_criteria": {
+    "definitive": "Chest auscultation, X-ray, BAL culture",
+    "supportive": ["Fever 40-41°C", "Coughing", "Nasal/eye discharge", "Laboured breathing"]
+  },
+  "manual_input_indicators": {
+    "appetite": "low",
+    "milk_production": "low",
+    "observations_keywords": [
+      "cough", "nasal discharge", "breathing", "respiratory", "pneumonia", "wheeze", "laboured"
+    ]
+  },
+  "treatment_info": {
+    "veterinary_treatment": "Broad-spectrum antibiotics if bacterial (vet selected). NSAIDs for fever and inflammation.",
+    "supportive_care": [
+      "Warm dry shelter – avoid drafts",
+      "Good ventilation without cold air exposure",
+      "Fresh water and easy-to-eat feed",
+      "Separation from herd to avoid stress"
+    ],
+    "first_aid": "Move animal to warm shelter. Ensure clean air. Monitor breathing rate. Call vet.",
+    "do_not": "Do not expose to cold wet conditions. Do not mix with healthy animals."
+  },
+  "key_evidence_weights": {
+    "fever_range": 0.25,
+    "hr_elevated": 0.20,
+    "respiratory_signs": 0.35,
+    "low_appetite": 0.10,
+    "discharge": 0.10
+  }
+}
