@@ -58,6 +58,11 @@ def upload_sensor():
     if not data:
         return error_response(["Request body must be valid JSON"])
 
+    # ── Normalize Pico W camelCase payload → snake_case ──────────────────
+    # Supports both the user's working firmware (camelCase) and our
+    # new firmware (snake_case) transparently.
+    data = _normalize_device_payload(data)
+
     valid, errors = validate_sensor_payload(data)
     if not valid:
         return error_response(errors)
@@ -90,6 +95,7 @@ def upload_sensor():
         "accel_y": data.get("accel_y"),
         "accel_z": data.get("accel_z"),
         "motion_magnitude": data.get("motion_magnitude"),
+        "breed": data.get("breed", "DEFAULT"),
         "status": "ONLINE",
     }
 
@@ -128,3 +134,74 @@ def device_status():
         })
 
     return success_response({"device": status})
+
+
+# ─────────────────────────────────────────────
+#  Payload Normalizer
+# ─────────────────────────────────────────────
+
+def _normalize_device_payload(data: dict) -> dict:
+    """
+    Normalize incoming device payload to the canonical snake_case format.
+
+    Handles two firmware variants:
+      A) Original camelCase (heartRate, accelX, …) – user's working code
+      B) Snake_case (heart_rate, accel_x, …)        – new AVIRA firmware
+
+    Also:
+      - Injects a default cow_id from device_id or 'PICO_01' if absent
+      - Sets heart_rate_valid / spo2_valid based on value range
+      - Nullifies spo2 if out of range (0 when finger not placed)
+    """
+    normalized = dict(data)  # shallow copy
+
+    # ── Field name mapping: camelCase → snake_case ────────────────────────
+    camel_map = {
+        "heartRate":       "heart_rate",
+        "heartRateValid":  "heart_rate_valid",
+        "spo2Valid":       "spo2_valid",
+        "accelX":          "accel_x",
+        "accelY":          "accel_y",
+        "accelZ":          "accel_z",
+        "motionMagnitude": "motion_magnitude",
+        "cowId":           "cow_id",
+        "sessionId":       "session_id",
+        "deviceId":        "device_id",
+    }
+    for camel, snake in camel_map.items():
+        if camel in normalized and snake not in normalized:
+            normalized[snake] = normalized.pop(camel)
+
+    # ── Inject cow_id if missing ──────────────────────────────────────────
+    if not normalized.get("cow_id"):
+        device_id = normalized.get("device_id", "PICO_01")
+        # Use device_id as cow prefix: PICO_01 → COW_PICO_01
+        normalized["cow_id"] = f"COW_{device_id}"
+        logger.info("No cow_id in payload – using device-derived: %s", normalized["cow_id"])
+
+    # ── Heart rate validity ───────────────────────────────────────────────
+    hr = normalized.get("heart_rate")
+    if hr is not None:
+        hr = float(hr)
+        valid_hr = 20 <= hr <= 300
+        normalized["heart_rate_valid"] = normalized.get("heart_rate_valid", valid_hr)
+        if not valid_hr:
+            normalized["heart_rate"] = None
+            normalized["heart_rate_valid"] = False
+    else:
+        normalized.setdefault("heart_rate_valid", False)
+
+    # ── SpO2 validity ─────────────────────────────────────────────────────
+    spo2 = normalized.get("spo2")
+    if spo2 is not None:
+        spo2 = float(spo2)
+        valid_spo2 = 50.0 <= spo2 <= 100.0
+        normalized["spo2_valid"] = normalized.get("spo2_valid", valid_spo2)
+        if not valid_spo2:
+            # spo2 = 0 means finger not placed → treat as invalid, not range error
+            normalized["spo2"] = None
+            normalized["spo2_valid"] = False
+    else:
+        normalized.setdefault("spo2_valid", False)
+
+    return normalized

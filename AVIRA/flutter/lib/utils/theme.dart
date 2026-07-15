@@ -51,7 +51,7 @@ abstract final class AviraTheme {
         onSurface:  textPrimary,
       ),
       scaffoldBackgroundColor: bgVoid,
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: bgMedium.withOpacity(0.6),
         elevation: 0,
         shape: RoundedRectangleBorder(

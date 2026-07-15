@@ -121,24 +121,30 @@ class TestDeviceUpload:
         assert "cow_id" in data
 
     def test_upload_missing_cow_id(self, client, sample_sensor_data):
+        """Normalizer auto-generates cow_id from device_id if missing – should succeed."""
         del sample_sensor_data["cow_id"]
         resp = client.post("/api/v1/device/upload", json=sample_sensor_data)
-        assert resp.status_code == 400
+        # Normalizer generates a cow_id so upload should succeed
+        assert resp.status_code == 201
         data = resp_json(resp)
-        assert data["success"] is False
-        assert any("cow_id" in e for e in data["errors"])
+        assert data["success"] is True
+        assert "session_id" in data  # session_id is always returned at top level
 
     def test_upload_invalid_heart_rate(self, client, sample_sensor_data):
+        """HR=999 is out of range; normalizer nullifies it and marks invalid – upload accepted."""
         sample_sensor_data["heart_rate"] = 999
         sample_sensor_data["heart_rate_valid"] = True
         resp = client.post("/api/v1/device/upload", json=sample_sensor_data)
-        assert resp.status_code == 400
+        # Normalizer clears invalid HR, so upload succeeds with valid=False
+        assert resp.status_code == 201
 
     def test_upload_invalid_spo2(self, client, sample_sensor_data):
+        """spo2=200 is out of range; normalizer nullifies it and marks invalid – upload accepted."""
         sample_sensor_data["spo2"] = 200.0
         sample_sensor_data["spo2_valid"] = True
         resp = client.post("/api/v1/device/upload", json=sample_sensor_data)
-        assert resp.status_code == 400
+        # Normalizer clears invalid spo2, so upload succeeds with valid=False
+        assert resp.status_code == 201
 
     def test_upload_non_json_body(self, client):
         resp = client.post(

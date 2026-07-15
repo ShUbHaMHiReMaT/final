@@ -1,0 +1,528 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – AI Prediction Output
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-15T18:48:35.845185+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_28B733A9399F
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+Generated At    : 2026-07-15T18:48:35.845185+00:00
+
+[HEALTH STATUS]
+  Alert Level   : LOW
+  Overall Score : 50.0
+
+[DISEASE PROBABILITIES]
+
+  ► Heat Stress
+    Probability  : 25.0%
+    Confidence   : MEDIUM
+    Urgency      : HIGH
+    Evidence     :
+    Missing      :
+
+  ► Milk Fever
+    Probability  : 10.0%
+    Confidence   : MEDIUM
+    Urgency      : CRITICAL
+    Evidence     :
+    Missing      :
+
+  ► Brucellosis
+    Probability  : 5.0%
+    Confidence   : MEDIUM
+    Urgency      : HIGH
+    Evidence     :
+    Missing      :
+
+  ► Johne's Disease
+    Probability  : 5.0%
+    Confidence   : MEDIUM
+    Urgency      : MEDIUM
+    Evidence     :
+    Missing      :
+
+  ► Ketosis
+    Probability  : 5.0%
+    Confidence   : MEDIUM
+    Urgency      : MEDIUM
+    Evidence     :
+    Missing      :
+
+  ► Worm Infestation
+    Probability  : 5.0%
+    Confidence   : MEDIUM
+    Urgency      : MEDIUM
+    Evidence     :
+    Missing      :
+
+  ► Mastitis
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : HIGH
+    Evidence     :
+    Missing      :
+
+  ► Foot & Mouth Disease
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : CRITICAL
+    Evidence     :
+    Missing      :
+
+  ► Lumpy Skin Disease
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : CRITICAL
+    Evidence     :
+    Missing      :
+
+  ► Haemorrhagic Septicaemia
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : CRITICAL
+    Evidence     :
+    Missing      :
+
+  ► Black Quarter
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : MEDIUM
+    Evidence     :
+    Missing      :
+
+  ► Theileriosis
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : CRITICAL
+    Evidence     :
+    Missing      :
+
+  ► Babesiosis
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : CRITICAL
+    Evidence     :
+    Missing      :
+
+  ► Bloat
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : CRITICAL
+    Evidence     :
+    Missing      :
+
+  ► Pneumonia
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : HIGH
+    Evidence     :
+    Missing      :
+
+  ► Tick Fever
+    Probability  : 0.0%
+    Confidence   : LOW
+    Urgency      : HIGH
+    Evidence     :
+    Missing      :
+
+[RECOMMENDATIONS]
+  • Continue daily monitoring. Record and upload sensor readings at consistent times each day.
+
+[VET REQUIRED]
+  False
+
+[RAW JSON PAYLOAD]
+{
+  "alert_level": "LOW",
+  "overall_health_score": 50.0,
+  "disease_probabilities": [
+    {
+      "disease": "Heat Stress",
+      "disease_id": "HEAT_STRESS",
+      "probability": 0.25,
+      "confidence": "MEDIUM",
+      "urgency": "HIGH",
+      "vet_required": false,
+      "evidence_matched": [
+        "High water intake 80.0 L \u2013 heat stress indicator"
+      ],
+      "evidence_missing": [
+        "Temperature not elevated"
+      ],
+      "reasoning_chain": [
+        "Heat Stress scoring: temp=38.5, water=80.0, rumination=7"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "Cooling therapy, IV fluids in severe cases. Electrolyte supplementation.",
+        "supportive_care": [
+          "Provide shade and cool water immediately",
+          "Spray cool water on body (especially neck and flank)",
+          "Install fans or increase ventilation",
+          "Provide electrolyte supplements",
+          "Feed during cooler hours (early morning / evening)",
+          "Avoid handling during peak heat"
+        ],
+        "first_aid": "Move to shade. Spray with cool (not ice cold) water. Offer fresh cool water. Reduce handling.",
+        "do_not": "Do not use ice-cold water directly \u2013 can cause shock. Do not move animals unnecessarily."
+      }
+    },
+    {
+      "disease": "Milk Fever",
+      "disease_id": "MILK_FEVER",
+      "probability": 0.1,
+      "confidence": "MEDIUM",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "evidence_matched": [
+        "Normal-low temperature 38.5\u00b0C"
+      ],
+      "evidence_missing": [
+        "No calving event or recumbency reported (key Milk Fever context)"
+      ],
+      "reasoning_chain": [
+        "Milk Fever scoring: temp=38.5, post_calving_obs=False"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "IV calcium borogluconate infusion \u2013 vet administered. Oral calcium supplements for prevention.",
+        "supportive_care": [
+          "Position cow in sternal recumbency (on belly, not flat on side)",
+          "Keep warm with blankets",
+          "Do not milk fully for 24-48 hours post-treatment",
+          "Provide fresh water and good hay",
+          "Monitor for relapse (common)"
+        ],
+        "first_aid": "Roll cow onto chest (sternal). Keep warm. Do NOT give water by drench. Call vet URGENTLY.",
+        "do_not": "Do not give calcium IV without vet \u2013 can cause cardiac arrest if given too fast."
+      }
+    },
+    {
+      "disease": "Brucellosis",
+      "disease_id": "BRUCELLOSIS",
+      "probability": 0.05,
+      "confidence": "MEDIUM",
+      "urgency": "HIGH",
+      "vet_required": true,
+      "evidence_matched": [
+        "Normal temperature consistent with Brucellosis"
+      ],
+      "evidence_missing": [
+        "No abortion or reproductive failure reported (primary Brucellosis indicator)"
+      ],
+      "reasoning_chain": [
+        "Brucellosis scoring: abortion_obs=False"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "No treatment \u2013 test and slaughter policy in most countries. Vaccination program (RB51 or S19 vaccine) for prevention.",
+        "supportive_care": [
+          "Strict isolation of aborted cow",
+          "Safe disposal of aborted foetus and placenta",
+          "Disinfect calving area thoroughly"
+        ],
+        "first_aid": "ZOONOSIS RISK \u2013 wear gloves and PPE when handling aborted material. Report to animal health authorities.",
+        "do_not": "Do not allow aborted material to contaminate feed or water. Do not handle without PPE."
+      }
+    },
+    {
+      "disease": "Johne's Disease",
+      "disease_id": "JOHNES",
+      "probability": 0.05,
+      "confidence": "MEDIUM",
+      "urgency": "MEDIUM",
+      "vet_required": true,
+      "evidence_matched": [
+        "Normal temperature (Johne's typically normal vitals)"
+      ],
+      "evidence_missing": [
+        "No chronic diarrhoea or weight loss reported"
+      ],
+      "reasoning_chain": [
+        "Johne's scoring: diarrhoea_obs=False"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "No effective treatment. Cull affected animals to prevent herd spread.",
+        "supportive_care": [
+          "Isolate affected animals from healthy herd",
+          "Good nutrition to extend productive life if kept",
+          "Test-and-cull programme for herd control"
+        ],
+        "first_aid": "Isolate cow. Prevent faecal contamination of feed and water. Test herd.",
+        "do_not": "Do not allow infected cows to calve with healthy herd. Do not use milk from affected animals for calves."
+      }
+    },
+    {
+      "disease": "Ketosis",
+      "disease_id": "KETOSIS",
+      "probability": 0.05,
+      "confidence": "MEDIUM",
+      "urgency": "MEDIUM",
+      "vet_required": false,
+      "evidence_matched": [
+        "Normal temperature \u2013 consistent with Ketosis"
+      ],
+      "evidence_missing": [
+        "No ketosis-specific observations"
+      ],
+      "reasoning_chain": [
+        "Ketosis scoring based on metabolic indicators"
+      ],
+      "treatment_info": {}
+    },
+    {
+      "disease": "Worm Infestation",
+      "disease_id": "WORM_INFESTATION",
+      "probability": 0.05,
+      "confidence": "MEDIUM",
+      "urgency": "MEDIUM",
+      "vet_required": false,
+      "evidence_matched": [
+        "Normal temperature consistent with chronic parasitism"
+      ],
+      "evidence_missing": [
+        "No worm or parasite signs reported"
+      ],
+      "reasoning_chain": [
+        "Worm Infestation scoring based on chronic production indicators"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "Strategic anthelmintic (dewormer) treatment. Vet selects product based on local resistance patterns.",
+        "supportive_care": [
+          "Good nutrition to support recovery",
+          "Rotational grazing to break parasite cycle",
+          "Clean water and hygienic bedding",
+          "Iron supplementation for anaemic animals"
+        ],
+        "first_aid": "Isolate if severely affected. Provide high-quality feed. Contact vet for deworming protocol.",
+        "do_not": "Do not deworm repeatedly with same drug \u2013 resistance develops. Test before treating."
+      }
+    },
+    {
+      "disease": "Mastitis",
+      "disease_id": "MASTITIS",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "HIGH",
+      "vet_required": true,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "Fever not present",
+        "HR within normal range",
+        "No udder abnormality reported"
+      ],
+      "reasoning_chain": [
+        "Mastitis scoring: temp=38.5, HR=65.0, obs_keywords matched=False"
+      ],
+      "treatment_info": {}
+    },
+    {
+      "disease": "Foot & Mouth Disease",
+      "disease_id": "FMD",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "Fever not present",
+        "No blisters, mouth lesions, or lameness reported"
+      ],
+      "reasoning_chain": [
+        "FMD scoring: temp=38.5, lesion_obs=False"
+      ],
+      "treatment_info": {}
+    },
+    {
+      "disease": "Lumpy Skin Disease",
+      "disease_id": "LSD",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "Fever not present",
+        "No skin nodules or lumps reported (key LSD indicator)"
+      ],
+      "reasoning_chain": [
+        "LSD scoring: temp=38.5, nodule_reported=False"
+      ],
+      "treatment_info": {}
+    },
+    {
+      "disease": "Haemorrhagic Septicaemia",
+      "disease_id": "HS",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "Fever not at HS threshold (\u226541\u00b0C)",
+        "HR not elevated to HS level",
+        "No throat swelling or sudden onset reported"
+      ],
+      "reasoning_chain": [
+        "HS scoring: temp=38.5, HR=65.0"
+      ],
+      "treatment_info": {}
+    },
+    {
+      "disease": "Black Quarter",
+      "disease_id": "BLACK_QUARTER",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "MEDIUM",
+      "vet_required": false,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "Fever not at BQ threshold",
+        "No muscle swelling/crepitation reported (critical BQ indicator)"
+      ],
+      "reasoning_chain": [
+        "BQ scoring: temp=38.5, HR=65.0"
+      ],
+      "treatment_info": {}
+    },
+    {
+      "disease": "Theileriosis",
+      "disease_id": "THEILERIOSIS",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "Fever not in Theileriosis range",
+        "No tick exposure or lymph node swelling mentioned"
+      ],
+      "reasoning_chain": [
+        "Theileriosis scoring: temp=38.5"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "Specific anti-protozoal drugs (e.g., Buparvaquone) prescribed by vet",
+        "supportive_care": [
+          "Strict tick control and acaricide treatment",
+          "Fluid support if dehydrated",
+          "Anti-fever medications",
+          "High-quality feed support during recovery"
+        ],
+        "first_aid": "Isolate animal. Remove visible ticks manually. Call vet immediately.",
+        "do_not": "Do not administer anti-protozoal drugs without vet prescription"
+      }
+    },
+    {
+      "disease": "Babesiosis",
+      "disease_id": "BABESIOSIS",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "Temperature not in Babesiosis range",
+        "No red urine or tick infestation mentioned (key Babesiosis signs)"
+      ],
+      "reasoning_chain": [
+        "Babesiosis scoring: temp=38.5, red_urine_obs=False"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "Specific anti-protozoal drugs (Diminazene aceturate or Imidocarb dipropionate) \u2013 vet prescription only",
+        "supportive_care": [
+          "Tick control with acaricides",
+          "IV fluids for dehydration",
+          "Blood transfusion in severe anaemia (vet decision)",
+          "Shade and rest"
+        ],
+        "first_aid": "Isolate animal. Remove ticks. Keep in cool shade. Contact vet urgently.",
+        "do_not": "Do not stress the animal \u2013 movement worsens haemolysis"
+      }
+    },
+    {
+      "disease": "Bloat",
+      "disease_id": "BLOAT",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "CRITICAL",
+      "vet_required": true,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "No abdominal distension or bloat reported (key Bloat indicator)"
+      ],
+      "reasoning_chain": [
+        "Bloat scoring: distension_obs=False, rumination=7"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "Stomach tube to release gas. Anti-foaming agents (poloxalene or simethicone) for frothy bloat. Trochar in life-threatening cases \u2013 vet only.",
+        "supportive_care": [
+          "Walk animal slowly to stimulate belching",
+          "Keep head elevated",
+          "Anti-foaming drench if frothy type (poloxalene)"
+        ],
+        "first_aid": "Walk cow slowly. Keep head higher than body. Call vet URGENTLY. Do NOT leave unattended.",
+        "do_not": "Do not let animal lie flat. Do not drench if unconscious."
+      }
+    },
+    {
+      "disease": "Pneumonia",
+      "disease_id": "PNEUMONIA",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "HIGH",
+      "vet_required": true,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "No respiratory signs reported (key Pneumonia indicator)"
+      ],
+      "reasoning_chain": [
+        "Pneumonia scoring: temp=38.5, respiratory_obs=False"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "Broad-spectrum antibiotics if bacterial (vet selected). NSAIDs for fever and inflammation.",
+        "supportive_care": [
+          "Warm dry shelter \u2013 avoid drafts",
+          "Good ventilation without cold air exposure",
+          "Fresh water and easy-to-eat feed",
+          "Separation from herd to avoid stress"
+        ],
+        "first_aid": "Move animal to warm shelter. Ensure clean air. Monitor breathing rate. Call vet.",
+        "do_not": "Do not expose to cold wet conditions. Do not mix with healthy animals."
+      }
+    },
+    {
+      "disease": "Tick Fever",
+      "disease_id": "TICK_FEVER",
+      "probability": 0.0,
+      "confidence": "LOW",
+      "urgency": "HIGH",
+      "vet_required": true,
+      "evidence_matched": [],
+      "evidence_missing": [
+        "Temperature not in tick fever range",
+        "No tick exposure or anaemia reported"
+      ],
+      "reasoning_chain": [
+        "Tick Fever scoring: temp=38.5, tick_obs=False"
+      ],
+      "treatment_info": {
+        "veterinary_treatment": "Antibiotics for Anaplasmosis (oxytetracycline). Anti-protozoals for Babesia/Theileria. Vet diagnosis required to select correct drug.",
+        "supportive_care": [
+          "Remove ticks manually with tick removers",
+          "Apply acaricide (tick spray/dip) under vet guidance",
+          "IV fluids if severely dehydrated",
+          "Anti-fever medication",
+          "Good nutrition support"
+        ],
+        "first_aid": "Remove visible ticks. Move to cool shade. Provide fresh water. Call vet.",
+        "do_not": "Do not crush ticks \u2013 can release infected material. Do not use same acaricide repeatedly."
+      }
+    }
+  ],
+  "recommendations": [
+    "Continue daily monitoring. Record and upload sensor readings at consistent times each day."
+  ],
+  "vet_required": false,
+  "llm_narrative": "Vital signs analysis for COW_TEST_001 (DEFAULT) shows physiological stress within acceptable range, with an overall health alert level of LOW. The most probable condition based on the available evidence is Heat Stress (25% probability), which has been identified through multi-agent analysis of sensor data, farmer observations, and clinical sign patterns. The estimated risk of health deterioration within 24 hours is 6%. Continue monitoring and report any worsening symptoms to a veterinarian. Note: These are AI-computed probability indicators and do NOT constitute a clinical diagnosis."
+}
+
+════════════════════════════════════════════════════════════

@@ -3,6 +3,7 @@
 /// All methods throw [ApiException] on failure.
 library;
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;

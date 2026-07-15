@@ -1,0 +1,10 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – Session Timeline
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-15T18:47:56.511016+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_2A19E5E075BB
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+[2026-07-15T18:47:56.511016+00:00] [SENSOR_UPLOAD] {"heart_rate": 65, "spo2": null, "motion_magnitude": 1.02, "device_id": "PICO_TEST"}

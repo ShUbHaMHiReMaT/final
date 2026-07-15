@@ -1,0 +1,12 @@
+════════════════════════════════════════════════════════════
+  AVIRA Evidence File – Session Timeline
+════════════════════════════════════════════════════════════
+  Timestamp  : 2026-07-15T18:47:56.590367+00:00
+  Cow ID     : COW_TEST_001
+  Session ID : SES_088F1EB8C1EE
+  System     : PRANIVA / AVIRA v1.0
+────────────────────────────────────────────────────────────
+
+[2026-07-15T18:47:56.590367+00:00] [SENSOR_UPLOAD] {"heart_rate": 65, "spo2": 97.5, "motion_magnitude": 1.02, "device_id": "PICO_TEST"}
+[2026-07-15T18:47:56.594692+00:00] [MANUAL_UPLOAD] {"temperature": 38.5, "appetite": 8, "milk_production": 22.0, "has_observations": true}
+[2026-07-15T18:47:56.694069+00:00] [AI_ANALYSIS_COMPLETE] {"alert_level": "LOW", "execution_ms": 0, "top_disease": "Heat Stress", "health_score": 50.0, "risk_24h": 0.0564}

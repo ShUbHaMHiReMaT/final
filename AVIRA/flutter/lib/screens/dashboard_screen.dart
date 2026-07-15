@@ -6,11 +6,13 @@ import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import '../models/analysis_result.dart';
 import '../models/sensor_data.dart';
+import 'dart:async';
 import '../services/api_service.dart';
 import '../bluetooth/bluetooth_service.dart';
 import '../utils/theme.dart';
 import 'upload_image_screen.dart';
 import 'history_screen.dart';
+import 'dart:async';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
