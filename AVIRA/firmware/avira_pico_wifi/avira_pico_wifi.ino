@@ -10,8 +10,8 @@
 // =========================================================================
 // CRITICAL FIX: Change this to a 2.4 GHz network (5G networks are invisible to Pico W)
 // =========================================================================
-const char* ssid     = "CSE";  // e.g., Your phone hotspot set to 2.4GHz
-const char* password = "12345678";
+const char* ssid     = "HANAMAR";  // e.g., Your phone hotspot set to 2.4GHz
+const char* password = "12341234";
 
 // Render Backend API Server Endpoint URL
 const char* serverUrl = "https://final-qj39.onrender.com/api/v1/device/upload";
