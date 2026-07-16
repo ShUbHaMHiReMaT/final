@@ -530,7 +530,7 @@ class _CowSimulationScreenState extends State<CowSimulationScreen> {
     return Scaffold(
       backgroundColor: AviraTheme.bgDeep,
       appBar: AppBar(
-        backgroundColor: AviraTheme.bgCard,
+        backgroundColor: AviraTheme.bgDark,
         foregroundColor: Colors.white,
         title: Row(
           children: [
@@ -597,7 +597,7 @@ class _CowSimulationScreenState extends State<CowSimulationScreen> {
             )
           : RefreshIndicator(
               color: AviraTheme.brandPrimary,
-              backgroundColor: AviraTheme.bgCard,
+              backgroundColor: AviraTheme.bgDark,
               onRefresh: _loadAnalysis,
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -698,7 +698,7 @@ class _CowSimulationScreenState extends State<CowSimulationScreen> {
   void _showLanguagePicker(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AviraTheme.bgCard,
+      backgroundColor: AviraTheme.bgDark,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
