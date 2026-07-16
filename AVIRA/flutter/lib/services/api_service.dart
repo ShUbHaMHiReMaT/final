@@ -25,10 +25,43 @@ class ApiService {
   final String baseUrl;
   final Duration timeout;
 
+  // ── Static state (app-wide singleton values) ──────────────────────────
+  // Stored here so CowSimulationScreen and other widgets can read the
+  // current cow/session without needing a Provider lookup.
+  static String? currentCowId;
+  static String? currentSessionId;
+  static String _baseUrlStatic = 'https://final-qj39.onrender.com/api/v1';
+
+  /// Update the static base URL whenever the user saves settings.
+  static void setBaseUrl(String url) => _baseUrlStatic = url;
+
   const ApiService({
     required this.baseUrl,
     this.timeout = const Duration(seconds: 30),
   });
+
+  // ── Static convenience getters ────────────────────────────────────────
+  static ApiService get instance => ApiService(baseUrl: _baseUrlStatic);
+
+  /// Fetch report – static helper for CowSimulationScreen.
+  static Future<Map<String, dynamic>?> fetchReport(
+      String cowId, String sessionId) async {
+    try {
+      return await instance.getReport(cowId, sessionId);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Fetch history – static helper.
+  static Future<Map<String, dynamic>?> fetchHistory(
+      String cowId, {int limit = 20}) async {
+    try {
+      return await instance.getHistory(cowId: cowId, limit: limit);
+    } catch (_) {
+      return null;
+    }
+  }
 
   // ── HTTP Helpers ──────────────────────────────────────────────────────
 

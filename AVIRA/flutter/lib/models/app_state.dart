@@ -7,13 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'sensor_data.dart';
 import 'analysis_result.dart';
+import '../services/api_service.dart';
 
 /// Global application state managed with ChangeNotifier.
 class AppState extends ChangeNotifier {
   // ── Identity ─────────────────────────────────────────────────────────
-  String _cowId = 'COW_001';
+  String _cowId = 'COW_PICO_01';
   String _sessionId = '';
-  String _serverUrl = 'http://10.0.2.2:5000/api/v1'; // Android emulator default
+  String _serverUrl = 'https://final-qj39.onrender.com/api/v1'; // Render default
 
   // ── Bluetooth ─────────────────────────────────────────────────────────
   bool _isScanning = false;
@@ -63,8 +64,11 @@ class AppState extends ChangeNotifier {
 
   Future<void> _loadPreferences() async {
     final prefs = await SharedPreferences.getInstance();
-    _cowId = prefs.getString('cow_id') ?? 'COW_001';
+    _cowId = prefs.getString('cow_id') ?? _cowId;
     _serverUrl = prefs.getString('server_url') ?? _serverUrl;
+    // Sync static ApiService fields
+    ApiService.currentCowId = _cowId;
+    ApiService.setBaseUrl(_serverUrl);
     notifyListeners();
   }
 
@@ -74,6 +78,7 @@ class AppState extends ChangeNotifier {
     _cowId = id.toUpperCase().trim();
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('cow_id', _cowId);
+    ApiService.currentCowId = _cowId;  // keep static in sync
     notifyListeners();
   }
 
@@ -81,6 +86,7 @@ class AppState extends ChangeNotifier {
     _serverUrl = url.trim();
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('server_url', _serverUrl);
+    ApiService.setBaseUrl(_serverUrl);  // keep static in sync
     notifyListeners();
   }
 
@@ -90,6 +96,7 @@ class AppState extends ChangeNotifier {
     _sensorHistory.clear();
     _latestSensor = const SensorData();
     _statusMessage = 'New session started';
+    ApiService.currentSessionId = _sessionId;  // keep static in sync
     notifyListeners();
   }
 

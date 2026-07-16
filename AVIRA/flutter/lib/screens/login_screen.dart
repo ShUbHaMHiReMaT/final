@@ -18,8 +18,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _farmIdCtrl     = TextEditingController(text: 'PRANIVA_FARM_01');
-  final _cowIdCtrl      = TextEditingController(text: 'COW_001');
-  final _serverUrlCtrl  = TextEditingController(text: 'http://10.0.2.2:5000/api/v1');
+  final _cowIdCtrl      = TextEditingController(text: 'COW_PICO_01');
+  final _serverUrlCtrl  = TextEditingController(text: 'https://final-qj39.onrender.com/api/v1');
 
   bool _isConnecting = false;
   String? _connectionError;
@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Android emulator: use 10.0.2.2\nPhysical device: use your computer\'s local IP',
+                        'Render (cloud): https://final-qj39.onrender.com/api/v1\nLocal dev: http://YOUR_PC_IP:5000/api/v1',
                         style: TextStyle(color: AviraTheme.textMuted, fontSize: 11),
                       ),
                       const SizedBox(height: 24),
