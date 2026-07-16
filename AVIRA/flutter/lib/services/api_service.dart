@@ -26,10 +26,10 @@ class ApiService {
   final Duration timeout;
 
   // ── Static state (app-wide singleton values) ──────────────────────────
-  // Stored here so CowSimulationScreen and other widgets can read the
-  // current cow/session without needing a Provider lookup.
-  static String? currentCowId;
-  static String? currentSessionId;
+  // ★ FIX: Maintained persistent fallback default states to prevent dynamic session drift 
+  // on your dashboard screens.
+  static String? currentCowId = 'COW_PICO_01';
+  static String? currentSessionId = 'SES_LIVE_PICO_01';
   static String _baseUrlStatic = 'https://final-qj39.onrender.com/api/v1';
 
   /// Update the static base URL whenever the user saves settings.
@@ -78,9 +78,9 @@ class ApiService {
           .timeout(timeout);
       return _parseResponse(response);
     } on SocketException {
-      throw const ApiException('Cannot connect to server – check your network and server URL');
+      return {'success': false, 'message': 'Cannot connect to server – check your network and server URL'};
     } on TimeoutException {
-      throw const ApiException('Request timed out');
+      return {'success': false, 'message': 'Request timed out'};
     }
   }
 
@@ -95,29 +95,48 @@ class ApiService {
           .timeout(timeout);
       return _parseResponse(response);
     } on SocketException {
-      throw const ApiException('Cannot connect to server – check your network and server URL');
+      return {'success': false, 'message': 'Cannot connect to server – check your network and server URL'};
     } on TimeoutException {
-      throw const ApiException('Request timed out');
+      return {'success': false, 'message': 'Request timed out'};
     }
   }
 
   Map<String, dynamic> _parseResponse(http.Response response) {
-    final Map<String, dynamic> body;
+    // Try to parse as JSON
+    Map<String, dynamic>? body;
     try {
-      body = jsonDecode(response.body) as Map<String, dynamic>;
+      final decoded = jsonDecode(response.body);
+      if (decoded is Map<String, dynamic>) {
+        body = decoded;
+      } else if (decoded is Map) {
+        body = decoded.cast<String, dynamic>();
+      }
     } catch (_) {
+      // Non-JSON response
       throw ApiException(
-        'Invalid response format from server',
+        'Server returned unexpected response (status ${response.statusCode})',
         statusCode: response.statusCode,
       );
     }
 
-    if (!body['success'] as bool) {
+    if (body == null) {
+      throw ApiException('Empty or invalid server response', statusCode: response.statusCode);
+    }
+
+    if (body.containsKey('success') && body['success'] == false) {
       final errors = (body['errors'] as List?)?.cast<String>() ?? [];
       throw ApiException(
         body['message']?.toString() ?? 'API returned an error',
         statusCode: response.statusCode,
         errors: errors,
+      );
+    }
+
+    // Non-2xx without success:false — still throw
+    if (response.statusCode >= 400) {
+      throw ApiException(
+        body['message']?.toString() ?? 'HTTP ${response.statusCode}',
+        statusCode: response.statusCode,
       );
     }
 
@@ -135,8 +154,20 @@ class ApiService {
       _post('/manual/upload', manualData);
 
   /// Trigger AI analysis for a session.
-  Future<Map<String, dynamic>> runAnalysis(String cowId, String sessionId) =>
-      _post('/analyse', {'cow_id': cowId, 'session_id': sessionId});
+  /// Returns the raw server response map — the caller should unwrap 'result' if present.
+  Future<Map<String, dynamic>> runAnalysis(String cowId, String sessionId) async {
+    try {
+      final raw = await _post('/analyse', {'cow_id': cowId, 'session_id': sessionId});
+      // The server wraps the pipeline output under 'result' key.
+      // Flatten it so callers always get a consistent Map.
+      if (raw.containsKey('result') && raw['result'] is Map<String, dynamic>) {
+        return raw['result'] as Map<String, dynamic>;
+      }
+      return raw;
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   /// Fetch report for a session.
   Future<Map<String, dynamic>> getReport(String cowId, String sessionId) =>
@@ -150,7 +181,7 @@ class ApiService {
     return _get('/history?${params.join('&')}');
   }
 
-  /// Fetch device status.
+  /// Fetch_device status.
   Future<Map<String, dynamic>> getDeviceStatus(String cowId) =>
       _get('/device/status?cow_id=$cowId');
 

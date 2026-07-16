@@ -133,12 +133,359 @@ class _DashboardScreenState extends State<DashboardScreen> {
 }
 
 // ─────────────────────────────────────────────
-//  HOME TAB
+//  HOME TAB  (polls server every 5 s for live WiFi sensor data)
 // ─────────────────────────────────────────────
 
-class _HomeTab extends StatelessWidget {
+class _HomeTab extends StatefulWidget {
   final BluetoothService bluetoothService;
   const _HomeTab({required this.bluetoothService});
+  @override
+  State<_HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<_HomeTab> {
+  Timer? _pollTimer;
+
+  // Latest values polled from the server
+  double? _hr;
+  double? _spo2;
+  double? _motion;
+  bool _hrValid = false;
+  bool _spo2Valid = false;
+  String _serverSessionId = '';   // Pico's real session ID from server
+  DateTime? _lastSeen;
+  bool _deviceOnline = false;
+  bool _polling = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Poll immediately on open, then every 5 seconds
+    WidgetsBinding.instance.addPostFrameCallback((_) => _pollServer());
+    _pollTimer = Timer.periodic(const Duration(seconds: 5), (_) => _pollServer());
+  }
+
+  @override
+  void dispose() {
+    _pollTimer?.cancel();
+    super.dispose();
+  }
+
+  // ── Poll /device/status for the cow's latest WiFi readings ────────────────
+  Future<void> _pollServer() async {
+    if (!mounted || _polling) return;
+    _polling = true;
+    try {
+      final appState = context.read<AppState>();
+      final api = ApiService(baseUrl: appState.serverUrl);
+      final resp = await api.getDeviceStatus(appState.cowId);
+
+      // resp = {"success": true, "device": {...}} or {"status": "OFFLINE"}
+      final device = resp['device'] as Map<String, dynamic>?;
+      if (device == null) {
+        if (mounted) setState(() => _deviceOnline = false);
+        _polling = false;
+        return;
+      }
+
+      final vitals = device['latest_vitals'] as Map<String, dynamic>? ?? device;
+
+      final hr    = _toDouble(vitals['heart_rate']);
+      final spo2  = _toDouble(vitals['spo2']);
+      final mot   = _toDouble(vitals['motion_magnitude']);
+      final hrV   = vitals['heart_rate_valid'] == true;
+      final spo2V = vitals['spo2_valid'] == true;
+      final sid   = (device['session_id'] ?? vitals['session_id'] ?? '').toString();
+
+      if (mounted) {
+        setState(() {
+          _hr              = hrV   ? hr   : null;
+          _spo2            = spo2V ? spo2 : null;
+          _motion          = mot;
+          _hrValid         = hrV;
+          _spo2Valid       = spo2V;
+          _deviceOnline    = true;
+          _lastSeen        = DateTime.now();
+          if (sid.isNotEmpty) _serverSessionId = sid;
+        });
+
+        // Also update AppState so the connection dot turns green
+        if (!appState.isConnected) {
+          appState.setConnected(connected: true, deviceName: 'Pico W (WiFi)');
+        }
+
+        // Save the real session ID so analysis uses the correct data
+        if (sid.isNotEmpty) {
+          ApiService.currentSessionId = sid;
+        }
+      }
+    } catch (_) {
+      // Server unreachable or OFFLINE response – don't crash
+      if (mounted) setState(() => _deviceOnline = false);
+    }
+    _polling = false;
+  }
+
+  double? _toDouble(dynamic v) {
+    if (v == null) return null;
+    return double.tryParse(v.toString());
+  }
+
+  // ── Run analysis using the server's session ID, not the app's local one ──
+  Future<void> _runAnalysis(BuildContext context, AppState state) async {
+    // Use the real session from Pico; fall back to app session if not yet polled
+    final sessionToUse = _serverSessionId.isNotEmpty
+        ? _serverSessionId
+        : state.sessionId;
+
+    state.setAnalysing(true);
+    try {
+      final api = ApiService(baseUrl: state.serverUrl);
+      // runAnalysis() already unwraps the 'result' key
+      final resultMap = await api.runAnalysis(state.cowId, sessionToUse);
+      state.setAnalysisResult(AnalysisResult.fromJson(resultMap));
+    } catch (e) {
+      state.setAnalysing(false);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Analysis failed: $e'),
+            backgroundColor: AviraTheme.brandDanger,
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AppState>(builder: (context, state, _) {
+      final analysis = state.latestAnalysis;
+
+      // Prefer BLE data if connected, else show WiFi-polled values
+      final bleSensor = state.latestSensor;
+      final useBle    = state.isConnected && bleSensor.heartRate != null;
+
+      final hrDisplay   = useBle
+          ? (bleSensor.heartRateValid ? '${bleSensor.heartRate?.toInt() ?? "--"}' : '--')
+          : (_hrValid && _hr != null ? '${_hr!.toInt()}' : '--');
+      final spo2Display = useBle
+          ? (bleSensor.spo2Valid ? '${bleSensor.spo2?.toStringAsFixed(1) ?? "--"}' : '--')
+          : (_spo2Valid && _spo2 != null ? '${_spo2!.toStringAsFixed(1)}' : '--');
+      final motDisplay  = useBle
+          ? (bleSensor.motionMagnitude?.toStringAsFixed(2) ?? '--')
+          : (_motion?.toStringAsFixed(2) ?? '--');
+
+      final sessionDisplay = _serverSessionId.isNotEmpty
+          ? _serverSessionId.replaceFirst('SES_', '').substring(0, 6)
+          : state.sessionId.substring(4, 10);
+
+      return ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          // ── Device status pill ──────────────────────────────────────────
+          _deviceStatusBadge(),
+          const SizedBox(height: 12),
+
+          // Alert Banner
+          if (analysis != null) _alertBanner(analysis),
+          if (analysis != null) const SizedBox(height: 12),
+
+          // Sensor grid
+          _sectionTitle('Live Sensor  ${_polling ? "⟳" : ""}'),
+          const SizedBox(height: 8),
+          GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.6,
+            children: [
+              _metricCard('Heart Rate', hrDisplay,   'BPM', AviraTheme.brandSuccess),
+              _metricCard('SpO2',       spo2Display, '%',   AviraTheme.brandInfo),
+              _metricCard('Motion',     motDisplay,  'mag', AviraTheme.brandAccent),
+              _metricCard('Session',    sessionDisplay, 'ID', AviraTheme.brandPrimary),
+            ],
+          ),
+          if (_lastSeen != null) ...[
+            const SizedBox(height: 6),
+            Text(
+              'Last update: ${_formatAge(_lastSeen!)}',
+              style: const TextStyle(color: AviraTheme.textMuted, fontSize: 10),
+              textAlign: TextAlign.right,
+            ),
+          ],
+          const SizedBox(height: 16),
+
+          // Quick actions
+          _sectionTitle('Quick Actions'),
+          const SizedBox(height: 8),
+          Row(children: [
+            Expanded(child: _actionBtn(context, '🔬 Vision', Icons.camera_alt,
+              () => Navigator.push(context, MaterialPageRoute(builder: (_) => const UploadImageScreen())))),
+            const SizedBox(width: 10),
+            Expanded(child: _actionBtn(context, '🗂 History', Icons.history,
+              () => Navigator.push(context, MaterialPageRoute(builder: (_) => const HistoryScreen())))),
+          ]),
+          const SizedBox(height: 10),
+          ElevatedButton.icon(
+            onPressed: state.isAnalysing ? null : () => _runAnalysis(context, state),
+            icon: state.isAnalysing
+                ? const SizedBox(width: 16, height: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2, color: AviraTheme.bgDark))
+                : const Text('🧠'),
+            label: Text(state.isAnalysing ? 'Analysing…' : 'Run AI Analysis'),
+          ),
+
+          // Session info when analysis uses a specific session
+          if (_serverSessionId.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Text(
+              'Will analyse session: $_serverSessionId',
+              style: const TextStyle(color: AviraTheme.textMuted, fontSize: 10),
+              textAlign: TextAlign.center,
+            ),
+          ],
+          const SizedBox(height: 16),
+
+          // Latest analysis summary
+          if (analysis != null) ...[
+            _sectionTitle('Latest Analysis'),
+            const SizedBox(height: 8),
+            ...analysis.diseaseCandidates.take(3).map((d) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: _diseaseRow(d),
+            )),
+          ],
+        ],
+      );
+    });
+  }
+
+  // ── Device status badge ────────────────────────────────────────────────
+  Widget _deviceStatusBadge() {
+    final color  = _deviceOnline ? AviraTheme.brandSuccess : AviraTheme.textMuted;
+    final label  = _deviceOnline ? '🟢 Pico W — WiFi connected' : '🔴 Waiting for device…';
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withOpacity(0.25)),
+      ),
+      child: Row(children: [
+        Text(label, style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w600)),
+        const Spacer(),
+        GestureDetector(
+          onTap: _pollServer,
+          child: Icon(Icons.refresh, color: color, size: 16),
+        ),
+      ]),
+    );
+  }
+
+  String _formatAge(DateTime t) {
+    final secs = DateTime.now().difference(t).inSeconds;
+    if (secs < 60) return '${secs}s ago';
+    return '${(secs / 60).floor()}m ago';
+  }
+
+  Widget _alertBanner(AnalysisResult analysis) {
+    final color = AviraTheme.alertColor(analysis.alertLevel);
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: color.withOpacity(0.4)),
+      ),
+      child: Row(children: [
+        Text(_alertIcon(analysis.alertLevel), style: const TextStyle(fontSize: 24)),
+        const SizedBox(width: 10),
+        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text('Alert: ${analysis.alertLevel}',
+            style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 14)),
+          if (analysis.vetRequired)
+            const Text('⚠️ Veterinary consultation required',
+              style: TextStyle(color: Color(0xFFFCA5A5), fontSize: 12)),
+        ])),
+      ]),
+    );
+  }
+
+  String _alertIcon(String level) {
+    switch (level) {
+      case 'CRITICAL': return '🔴';
+      case 'HIGH':     return '🟠';
+      case 'MODERATE': return '🟡';
+      default:         return '🟢';
+    }
+  }
+
+  Widget _sectionTitle(String title) => Text(
+    title,
+    style: const TextStyle(
+      color: AviraTheme.textSecondary, fontSize: 11,
+      fontWeight: FontWeight.w700, letterSpacing: 1.2,
+    ),
+  );
+
+  Widget _metricCard(String label, String value, String unit, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AviraTheme.bgMedium.withOpacity(0.6),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.08)),
+      ),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(label, style: TextStyle(color: AviraTheme.textMuted, fontSize: 10, letterSpacing: 1)),
+        const Spacer(),
+        Text(value, style: TextStyle(
+          color: color, fontSize: 28, fontWeight: FontWeight.w800, fontFamily: 'monospace',
+        )),
+        Text(unit, style: TextStyle(color: AviraTheme.textMuted, fontSize: 11)),
+      ]),
+    );
+  }
+
+  Widget _actionBtn(BuildContext ctx, String label, IconData icon, VoidCallback onTap) {
+    return OutlinedButton.icon(
+      onPressed: onTap,
+      icon: Icon(icon, size: 16),
+      label: Text(label, style: const TextStyle(fontSize: 13)),
+    );
+  }
+
+  Widget _diseaseRow(DiseaseCandidate d) {
+    final color = d.probability >= 0.6 ? AviraTheme.brandDanger
+        : d.probability >= 0.35 ? AviraTheme.brandWarning
+        : AviraTheme.brandPrimary;
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: AviraTheme.bgMedium.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.white.withOpacity(0.07)),
+      ),
+      child: Row(children: [
+        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(d.disease, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+          const SizedBox(height: 4),
+          LinearProgressIndicator(
+            value: d.probability,
+            backgroundColor: Colors.white.withOpacity(0.08),
+            valueColor: AlwaysStoppedAnimation<Color>(color),
+          ),
+        ])),
+        const SizedBox(width: 10),
+        Text('${(d.probability * 100).toInt()}%',
+          style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 15, fontFamily: 'monospace')),
+      ]),
+    );
+  }
+}
 
   @override
   Widget build(BuildContext context) {

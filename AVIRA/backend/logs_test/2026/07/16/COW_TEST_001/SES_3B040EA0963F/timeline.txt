@@ -1,13 +1,10 @@
 ════════════════════════════════════════════════════════════
   AVIRA Evidence File – Session Timeline
 ════════════════════════════════════════════════════════════
-  Timestamp  : 2026-07-16T09:02:07.534757+00:00
+  Timestamp  : 2026-07-16T14:24:06.646532+00:00
   Cow ID     : COW_TEST_001
-  Session ID : SES_MYTEST123456
+  Session ID : SES_3B040EA0963F
   System     : PRANIVA / AVIRA v1.0
 ────────────────────────────────────────────────────────────
 
-[2026-07-16T09:02:07.534757+00:00] [SENSOR_UPLOAD] {"heart_rate": 65, "spo2": 97.5, "motion_magnitude": 1.02, "device_id": "PICO_TEST"}
-[2026-07-16T09:06:12.170155+00:00] [SENSOR_UPLOAD] {"heart_rate": 65, "spo2": 97.5, "motion_magnitude": 1.02, "device_id": "PICO_TEST"}
-[2026-07-16T10:42:42.667363+00:00] [SENSOR_UPLOAD] {"heart_rate": 65, "spo2": 97.5, "motion_magnitude": 1.02, "device_id": "PICO_TEST"}
-[2026-07-16T14:24:06.641125+00:00] [SENSOR_UPLOAD] {"heart_rate": 65, "spo2": 97.5, "motion_magnitude": 1.02, "device_id": "PICO_TEST"}
+[2026-07-16T14:24:06.646532+00:00] [MANUAL_UPLOAD] {"temperature": 38.5, "appetite": 8, "milk_production": 22.0, "has_observations": true}
