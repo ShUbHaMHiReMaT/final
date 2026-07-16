@@ -14,6 +14,16 @@ abstract final class AviraTheme {
   static const Color brandSuccess   = Color(0xFF10B981);
   static const Color brandInfo      = Color(0xFF3B82F6);
 
+  // ── Card / Border shorthands ─────────────────────────────────────────
+  static const Color cardBg       = Color(0xFF1E293B);   // bgMedium alias
+  static const Color borderGlass  = Color(0x14FFFFFF);   // white @ 8% opacity
+
+  // ── Alert shorthands (for widgets) ──────────────────────────────────
+  static const Color alertCritical = Color(0xFFEF4444);  // same as brandDanger
+  static const Color alertHigh     = Color(0xFFF59E0B);  // same as brandWarning
+  static const Color alertModerate = Color(0xFF3B82F6);  // same as brandInfo
+  static const Color alertLow      = Color(0xFF10B981);  // same as brandSuccess
+
   // ── Background ───────────────────────────────────────────────────────
   static const Color bgVoid   = Color(0xFF030712);
   static const Color bgDeep   = Color(0xFF0A0F1E);

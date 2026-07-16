@@ -10,9 +10,11 @@ import 'dart:async';
 import '../services/api_service.dart';
 import '../bluetooth/bluetooth_service.dart';
 import '../utils/theme.dart';
+import '../utils/i18n.dart';
+import '../utils/tts_service.dart';
 import 'upload_image_screen.dart';
 import 'history_screen.dart';
-import 'dart:async';
+import 'cow_simulation_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -855,6 +857,7 @@ class _SettingsTab extends StatefulWidget {
 class _SettingsTabState extends State<_SettingsTab> {
   late TextEditingController _cowCtrl;
   late TextEditingController _urlCtrl;
+  bool _ttsTestRunning = false;
 
   @override
   void initState() {
@@ -862,6 +865,8 @@ class _SettingsTabState extends State<_SettingsTab> {
     final state = context.read<AppState>();
     _cowCtrl = TextEditingController(text: state.cowId);
     _urlCtrl = TextEditingController(text: state.serverUrl);
+    // Init TTS on first load
+    TtsService.instance.init();
   }
 
   @override
@@ -871,15 +876,117 @@ class _SettingsTabState extends State<_SettingsTab> {
     super.dispose();
   }
 
+  // ── Language picker ────────────────────────────────────────────────
+  void _showLanguagePicker() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AviraTheme.bgDark,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Select Language / भाषा चुनें',
+              style: TextStyle(
+                color: AviraTheme.brandPrimary,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: AviraI18n.supportedLanguages.map((lang) {
+                final isSelected = AviraI18n.currentLang == lang['code'];
+                return GestureDetector(
+                  onTap: () async {
+                    AviraI18n.setLanguage(lang['code']!);
+                    await TtsService.instance.setLanguage(lang['code']!);
+                    if (mounted) setState(() {});
+                    Navigator.pop(ctx);
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Language set: ${lang['name']}'),
+                          backgroundColor: AviraTheme.brandSuccess,
+                        ),
+                      );
+                    }
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? AviraTheme.brandPrimary.withOpacity(0.15)
+                          : AviraTheme.bgMedium,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: isSelected ? AviraTheme.brandPrimary : Colors.white12,
+                        width: isSelected ? 1.5 : 0.5,
+                      ),
+                    ),
+                    child: Text(
+                      lang['name']!,
+                      style: TextStyle(
+                        color: isSelected ? AviraTheme.brandPrimary : Colors.white70,
+                        fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ── TTS test ───────────────────────────────────────────────────────
+  Future<void> _testTTS() async {
+    setState(() => _ttsTestRunning = true);
+    try {
+      await TtsService.instance.speakAlert('NORMAL', 'No disease detected');
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('TTS error: $e'), backgroundColor: AviraTheme.brandDanger),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _ttsTestRunning = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final currentLangName = AviraI18n.supportedLanguages
+        .firstWhere((l) => l['code'] == AviraI18n.currentLang,
+            orElse: () => {'name': 'English'})
+        .values
+        .first;
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         const Text('⚙️ Settings',
-          style: TextStyle(color: AviraTheme.textSecondary, fontWeight: FontWeight.w700,
-            fontSize: 15, letterSpacing: 1)),
+          style: TextStyle(
+            color: AviraTheme.textSecondary,
+            fontWeight: FontWeight.w700,
+            fontSize: 15,
+            letterSpacing: 1,
+          ),
+        ),
         const SizedBox(height: 16),
+
+        // ── Server & Animal ──────────────────────────────────────────
         TextFormField(
           controller: _cowCtrl,
           style: const TextStyle(color: AviraTheme.textPrimary, fontFamily: 'monospace'),
@@ -891,13 +998,18 @@ class _SettingsTabState extends State<_SettingsTab> {
         const SizedBox(height: 12),
         TextFormField(
           controller: _urlCtrl,
-          style: const TextStyle(color: AviraTheme.textPrimary, fontFamily: 'monospace', fontSize: 12),
+          style: const TextStyle(
+            color: AviraTheme.textPrimary,
+            fontFamily: 'monospace',
+            fontSize: 12,
+          ),
           decoration: const InputDecoration(
             labelText: 'Backend Server URL',
             prefixIcon: Icon(Icons.cloud, color: AviraTheme.brandPrimary),
           ),
         ),
         const SizedBox(height: 16),
+
         ElevatedButton(
           onPressed: () async {
             final state = context.read<AppState>();
@@ -905,26 +1017,176 @@ class _SettingsTabState extends State<_SettingsTab> {
             await state.setServerUrl(_urlCtrl.text);
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('✅ Settings saved'),
-                  backgroundColor: AviraTheme.brandSuccess),
+                const SnackBar(
+                  content: Text('✅ Settings saved'),
+                  backgroundColor: AviraTheme.brandSuccess,
+                ),
               );
             }
           },
           child: const Text('💾 Save Settings'),
         ),
-        const SizedBox(height: 16),
+
+        const SizedBox(height: 8),
         OutlinedButton.icon(
           onPressed: () {
             context.read<AppState>().newSession();
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('🔄 New session started'),
-                backgroundColor: AviraTheme.brandInfo),
+              const SnackBar(
+                content: Text('🔄 New session started'),
+                backgroundColor: AviraTheme.brandInfo,
+              ),
             );
           },
           icon: const Icon(Icons.refresh),
           label: const Text('Start New Session'),
         ),
+
         const SizedBox(height: 24),
+
+        // ── Language Settings ────────────────────────────────────────
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AviraTheme.bgMedium.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.white.withOpacity(0.08)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '🌍 Language / भाषा',
+                style: TextStyle(
+                  color: AviraTheme.brandPrimary,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'Supports: EN, हिंदी, ಕನ್ನಡ, தமிழ், తెలుగు, मराठी, ગુજ, বাংলা',
+                style: TextStyle(color: AviraTheme.textMuted, fontSize: 11),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: _showLanguagePicker,
+                      icon: const Text('🌐', style: TextStyle(fontSize: 16)),
+                      label: Text(
+                        'Current: ${AviraI18n.currentLang.toUpperCase()} ($currentLangName)',
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        // ── TTS Settings ─────────────────────────────────────────────
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AviraTheme.bgMedium.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.white.withOpacity(0.08)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '🔊 Voice Alerts (TTS)',
+                style: TextStyle(
+                  color: AviraTheme.brandPrimary,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'Health alerts are spoken in the selected Indian language',
+                style: TextStyle(color: AviraTheme.textMuted, fontSize: 11),
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AviraTheme.brandSecondary,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: _ttsTestRunning ? null : _testTTS,
+                icon: _ttsTestRunning
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Icon(Icons.volume_up),
+                label: Text(_ttsTestRunning ? 'Speaking...' : 'Test Voice Alert'),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        // ── Digital Cow Twin ─────────────────────────────────────────
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AviraTheme.bgMedium.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: AviraTheme.brandPrimary.withOpacity(0.25)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '🐄 Digital Cow Twin',
+                style: TextStyle(
+                  color: AviraTheme.brandPrimary,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'View animated cow body with disease region highlighting',
+                style: TextStyle(color: AviraTheme.textMuted, fontSize: 11),
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AviraTheme.brandPrimary,
+                  foregroundColor: AviraTheme.bgDark,
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const CowSimulationScreen(),
+                  ),
+                ),
+                icon: const Text('🐄', style: TextStyle(fontSize: 18)),
+                label: const Text(
+                  'Open Digital Twin',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 24),
+
+        // ── About ────────────────────────────────────────────────────
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
@@ -932,13 +1194,38 @@ class _SettingsTabState extends State<_SettingsTab> {
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.white.withOpacity(0.07)),
           ),
-          child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('About AVIRA', style: TextStyle(color: AviraTheme.textSecondary, fontWeight: FontWeight.w700)),
-            SizedBox(height: 8),
-            Text('Version: 1.0.0\nPipeline: 6 AI Agents\nKnowledge Base: 6 diseases\nHardware: MAX30102 + MPU6500 (Pico W)\nBy: PRANIVA',
-              style: TextStyle(color: AviraTheme.textMuted, fontSize: 12, height: 1.7)),
-          ]),
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'About AVIRA v2',
+                style: TextStyle(
+                  color: AviraTheme.textSecondary,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Version: 2.0.0\n'
+                'Pipeline: 12 AI Agents\n'
+                'LLM: NVIDIA NIM (Llama 3.1 Nemotron)\n'
+                'Algorithms: ARIMA, Isolation Forest,\n'
+                '            DeepSurv, XGBoost, PPO\n'
+                'Knowledge Base: 16 diseases\n'
+                'Hardware: MAX30102 + MPU6500 (Pico W)\n'
+                'Languages: EN/HI/KN/TA/TE/MR/GU/BN\n'
+                'By: PRANIVA',
+                style: TextStyle(
+                  color: AviraTheme.textMuted,
+                  fontSize: 12,
+                  height: 1.7,
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ],
+          ),
         ),
+        const SizedBox(height: 40),
       ],
     );
   }
